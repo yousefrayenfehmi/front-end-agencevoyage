@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>Modifier un Vol</h2>
+<h2 mat-dialog-title>Ajouter un Vol</h2>
 <mat-dialog-content>
-  <form (ngSubmit)="onSubmitEdit()" class="grid-container">
+  <form (ngSubmit)="onSubmit()" class="grid-container">
     <mat-form-field class="form-field">
       <mat-label>De</mat-label>
       <input matInput [(ngModel)]="flight.from" name="from" required>
@@ -26,8 +26,23 @@
       <input matInput [(ngModel)]="flight.price" name="price" type="number" required>
     </mat-form-field>
 
+    <!-- Nouveau champ: Vol direct (checkbox) -->
+    <mat-checkbox [(ngModel)]="isDirect" name="isDirect">Vol direct</mat-checkbox>
+
+    <!-- Nouveau champ: Société de transport -->
+    <mat-form-field class="form-field full-width">
+      <mat-label>Société de transport</mat-label>
+      <input matInput [(ngModel)]="flight.transportCompany" name="transportCompany" required>
+    </mat-form-field>
+
+    <!-- Nouveau champ: Description du voyage -->
+    <mat-form-field class="form-field full-width">
+      <mat-label>Description du voyage</mat-label>
+      <textarea matInput [(ngModel)]="flight.description" name="description"></textarea>
+    </mat-form-field>
+
     <div class="grid-container">
-      <button mat-raised-button color="primary" type="submit">Enregistrer</button>
+      <button mat-raised-button color="primary" type="submit">Ajouter</button>
       <button mat-raised-button (click)="onClose()">Annuler</button>
     </div>
   </form>

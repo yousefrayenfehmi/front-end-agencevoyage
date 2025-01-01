@@ -1,36 +1,67 @@
 <div class="container">
-    <h2 class="text-xl font-semibold mb-4">Gestion des Hotels</h2>
-    <button (click)="handleAdd('hotels')" class="add-button mb-4">
-      Ajouter un Hotel
-    </button>
-    <table class="hotel-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nom</th>
-          <th>Emplacement</th>
-          <th>Note</th>
-          <th>Prix par nuit</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let hotel of hotels">
-          <td>{{ hotel.id }}</td>
-          <td>{{ hotel.name }}</td>
-          <td>{{ hotel.location }}</td>
-          <td>{{ hotel.rating }} </td>
-          <td>{{ hotel.pricePerNight }} €</td>
-          <td>
+  <h2 class="text-xl font-semibold mb-4">Gestion des Hotels</h2>
+  <button (click)="handleAdd('hotels')" class="add-button mb-4">
+    Ajouter un Hotel
+  </button>
+  
+  <table class="hotel-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Emplacement</th>
+        <th>Note</th>
+        <th>Prix par nuit</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let hotel of paginatedHotels">
+        <td>{{ hotel.id }}</td>
+        <td>{{ hotel.name }}</td>
+        <td>{{ hotel.location }}</td>
+        <td>{{ hotel.rating }}</td>
+        <td>{{ hotel.pricePerNight }} €</td>
+        <td>
+          <div class="actions-container">
             <button (click)="handleEdit('Hotels', hotel)" class="edit-button">
               Modifier
             </button>
             <button (click)="handleDelete('hotels', hotel.id)" class="delete-button">
               Supprimer
             </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            <button (click)="showDescription(hotel)" class="view-description-button">
+              Voir description
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div class="pagination-container">
+    <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-button">
+      Page Précédente
+    </button>
+    <span>Page {{ currentPage }} / {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-button">
+      Page Suivante
+    </button>
   </div>
-  
+
+  <!-- Description Modal -->
+  <div *ngIf="selectedHotel" class="description-modal">
+    <div class="modal-content">
+      <h3>Description de l'hôtel</h3>
+      <p><strong>Nom:</strong> {{ selectedHotel.name }}</p>
+      <p><strong>Emplacement:</strong> {{ selectedHotel.location }}</p>
+      <p><strong>Note:</strong> {{ selectedHotel.rating }}</p>
+      <p><strong>Prix par nuit:</strong> {{ selectedHotel.pricePerNight }} €</p>
+      <p><strong>Description:</strong> {{ selectedHotel.description }}</p>
+      <button (click)="closeDescription()" class="close-button">
+        Fermer
+      </button>
+    </div>
+  </div>
+</div>

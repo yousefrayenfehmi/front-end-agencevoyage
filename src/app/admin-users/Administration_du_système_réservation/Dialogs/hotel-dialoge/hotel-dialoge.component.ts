@@ -18,7 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class HotelDialogeComponent {
 constructor(public dialogRef: MatDialogRef<HotelDialogeComponent>) {}
-  Hotel = { name: '', location: '', rating: '', pricePerNight: ''};
+  Hotel = { name: '', location: '', rating: '', pricePerNight: '', description: '' };
 
   onSubmit() {
     console.log('Vol ajouté :', this.Hotel);

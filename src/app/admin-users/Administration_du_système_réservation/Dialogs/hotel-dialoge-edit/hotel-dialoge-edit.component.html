@@ -1,29 +1,35 @@
-<h2 mat-dialog-title>Modifier l'Hôtel</h2>
+<h2 mat-dialog-title>Ajouter un Hôtel</h2>
 <mat-dialog-content>
-  <form (ngSubmit)="onSubmit()">
-    <mat-form-field>
+  <form (ngSubmit)="onSubmit()" class="grid-container">
+    <mat-form-field class="form-field">
       <mat-label>Nom</mat-label>
-      <input matInput [(ngModel)]="Hotel.name" name="name" required />
+      <input matInput [(ngModel)]="Hotel.name" name="name" required>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="form-field">
       <mat-label>Emplacement</mat-label>
-      <input matInput [(ngModel)]="Hotel.location" name="location" required />
+      <input matInput [(ngModel)]="Hotel.location" name="location" required>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="form-field">
       <mat-label>Note</mat-label>
-      <input matInput [(ngModel)]="Hotel.rating" name="rating" type="number" required />
+      <input matInput [(ngModel)]="Hotel.rating" name="rating" required>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="form-field full-width">
       <mat-label>Prix par nuit</mat-label>
-      <input matInput [(ngModel)]="Hotel.pricePerNight" name="pricePerNight" type="number" required />
+      <input matInput [(ngModel)]="Hotel.pricePerNight" name="price" type="number" required>
     </mat-form-field>
 
-    <div mat-dialog-actions>
-      <button mat-button (click)="onClose()">Annuler</button>
-      <button mat-raised-button color="primary" type="submit">Sauvegarder</button>
+    <!-- Nouveau champ Description -->
+    <mat-form-field class="form-field full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="Hotel.description" name="description" rows="4" required></textarea>
+    </mat-form-field>
+
+    <div class="grid-container">
+      <button mat-raised-button color="primary" type="submit">Ajouter</button>
+      <button mat-raised-button (click)="onClose()">Annuler</button>
     </div>
   </form>
 </mat-dialog-content>

@@ -5,23 +5,39 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @Component({
   selector: 'app-vol-dialog',
   standalone: true,
   imports: [ MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
-    MatButtonModule, FormsModule],
+    MatButtonModule, FormsModule,MatCheckboxModule],
   templateUrl: './vol-dialog.component.html',
   styleUrl: './vol-dialog.component.scss'
 })
 export class VolDialogComponent {
 
   constructor(public dialogRef: MatDialogRef<VolDialogComponent>) {}
-  flight = { from: '', to: '', departureTime: '', arrivalTime: '', price: '' };
+  isDirect=false
+  flight = {
+    from: '',
+    to: '',
+    departureTime: '',
+    arrivalTime: '',
+    price: 0,
+    type: '',  
+    transportCompany: '',  
+    description: ''  
+  };
 
   onSubmit() {
-    // Logique pour ajouter le vol
+   if(this.isDirect){
+    this.flight.type="Direct"
+   }
+   else{
+    this.flight.type="Indirect"
+   }
     console.log('Vol ajouté :', this.flight);
     this.dialogRef.close(this.flight);
   }

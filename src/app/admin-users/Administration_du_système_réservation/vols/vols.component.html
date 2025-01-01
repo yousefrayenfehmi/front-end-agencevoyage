@@ -1,38 +1,78 @@
 <div class="container">
-    <h2 class="text-xl font-semibold mb-4">Gestion des vols</h2>
-    <button (click)="handleAdd('flights')" class="add-button mb-4">
-      Ajouter un vol
-    </button>
-    <table class="flight-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>De</th>
-          <th>Vers</th>
-          <th>Départ</th>
-          <th>Arrivée</th>
-          <th>Prix</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let flight of flights">
-          <td>{{ flight.id }}</td>
-          <td>{{ flight.from }}</td>
-          <td>{{ flight.to }}</td>
-          <td>{{ flight.departureTime }}</td>
-          <td>{{ flight.arrivalTime }}</td>
-          <td>{{ flight.price }} €</td>
-          <td>
+  <h2 class="text-xl font-semibold mb-4">Gestion des vols</h2>
+  <button (click)="handleAdd('flights')" class="add-button mb-4">
+    Ajouter un vol
+  </button>
+  
+  <!-- Table des vols -->
+  <table class="flight-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>De</th>
+        <th>Vers</th>
+        <th>Départ</th>
+        <th>Arrivée</th>
+        <th>Société</th>
+        <th>Type de vol</th>
+        <th>Prix</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let flight of paginatedData">
+        <td>{{ flight.id }}</td>
+        <td>{{ flight.from }}</td>
+        <td>{{ flight.to }}</td>
+        <td>{{ flight.departureTime }}</td>
+        <td>{{ flight.arrivalTime }}</td>
+        <td>{{ flight.transportCompany }}</td>
+        <td>{{ flight.type }}</td>
+        <td>{{ flight.price }} €</td>
+        <td>
+          <div class="actions-container">
             <button (click)="handleEdit('flights', flight)" class="edit-button">
               Modifier
             </button>
             <button (click)="handleDelete('flights', flight.id)" class="delete-button">
               Supprimer
             </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+            <button (click)="showDescription(flight)" class="view-description-button">
+              Voir description
+            </button>
+          </div>
+        </td>
+        
+      </tr>
+    </tbody>
+  </table>
   
+  <!-- Pagination -->
+  <div class="pagination-container">
+    <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-button">
+      Page Précédente
+    </button>
+    <span>Page {{ currentPage }} / {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-button">
+      Page Suivante
+    </button>
+  </div>
+
+  <!-- Description Modal -->
+  <div *ngIf="selectedFlight" class="description-modal">
+    <div class="modal-content">
+      <h3>Description du vol</h3>
+      <p><strong>De:</strong> {{ selectedFlight.from }}</p>
+      <p><strong>Vers:</strong> {{ selectedFlight.to }}</p>
+      <p><strong>Départ:</strong> {{ selectedFlight.departureTime }}</p>
+      <p><strong>Arrivée:</strong> {{ selectedFlight.arrivalTime }}</p>
+      <p><strong>Société:</strong> {{ selectedFlight.transportCompany }}</p>
+      <p><strong>Type de vol:</strong> {{ selectedFlight.type }}</p>
+      <p><strong>Prix:</strong> {{ selectedFlight.price }} €</p>
+      <p><strong>Description:</strong> {{ selectedFlight.description }}</p>
+      <button (click)="closeDescription()" class="close-button">
+        Fermer
+      </button>
+    </div>
+  </div>
+</div>

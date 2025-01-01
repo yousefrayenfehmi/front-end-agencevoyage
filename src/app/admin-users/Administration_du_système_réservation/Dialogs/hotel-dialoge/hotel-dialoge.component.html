@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Ajouter un Vol</h2>
+<mat-dialog-content>
+  <form (ngSubmit)="onSubmit()" class="grid-container">
+    <mat-form-field class="form-field">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="Hotel.name" name="from" required>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Emplacement</mat-label>
+      <input matInput [(ngModel)]="Hotel.location" name="to" required>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>note</mat-label>
+      <input matInput [(ngModel)]="Hotel.rating" name="departureTime" required>
+    </mat-form-field>
+
+    
+    <mat-form-field class="form-field full-width">
+      <mat-label>Prix par nuit</mat-label>
+      <input matInput [(ngModel)]="Hotel.pricePerNight" name="price" type="number" required>
+    </mat-form-field>
+
+    <div class="grid-container">
+      <button mat-raised-button color="primary" type="submit">Ajouter</button>
+      <button mat-raised-button (click)="onClose()">Annuler</button>
+    </div>
+  </form>
+</mat-dialog-content>

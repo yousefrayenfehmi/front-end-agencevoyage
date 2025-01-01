@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>Ajouter un Vol</h2>
+<mat-dialog-content>
+  <form (ngSubmit)="onSubmit()" class="grid-container">
+    <mat-form-field class="form-field">
+      <mat-label>De</mat-label>
+      <input matInput [(ngModel)]="flight.from" name="from" required>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Vers</mat-label>
+      <input matInput [(ngModel)]="flight.to" name="to" required>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Départ</mat-label>
+      <input matInput [(ngModel)]="flight.departureTime" name="departureTime" required>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Arrivée</mat-label>
+      <input matInput [(ngModel)]="flight.arrivalTime" name="arrivalTime" required>
+    </mat-form-field>
+
+    <mat-form-field class="form-field full-width">
+      <mat-label>Prix</mat-label>
+      <input matInput [(ngModel)]="flight.price" name="price" type="number" required>
+    </mat-form-field>
+
+    <div class="grid-container">
+      <button mat-raised-button color="primary" type="submit">Ajouter</button>
+      <button mat-raised-button (click)="onClose()">Annuler</button>
+    </div>
+  </form>
+</mat-dialog-content>

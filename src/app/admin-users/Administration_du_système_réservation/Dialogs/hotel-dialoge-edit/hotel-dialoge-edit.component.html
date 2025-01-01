@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Modifier l'Hôtel</h2>
+<mat-dialog-content>
+  <form (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Nom</mat-label>
+      <input matInput [(ngModel)]="Hotel.name" name="name" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Emplacement</mat-label>
+      <input matInput [(ngModel)]="Hotel.location" name="location" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Note</mat-label>
+      <input matInput [(ngModel)]="Hotel.rating" name="rating" type="number" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Prix par nuit</mat-label>
+      <input matInput [(ngModel)]="Hotel.pricePerNight" name="pricePerNight" type="number" required />
+    </mat-form-field>
+
+    <div mat-dialog-actions>
+      <button mat-button (click)="onClose()">Annuler</button>
+      <button mat-raised-button color="primary" type="submit">Sauvegarder</button>
+    </div>
+  </form>
+</mat-dialog-content>

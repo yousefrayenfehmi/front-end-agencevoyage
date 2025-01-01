@@ -1,0 +1,76 @@
+<div class="home-container">
+  <header class="hero">
+    <div class="min-h-screen bg-green-700 p-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="relative">
+         
+          <mat-tab-group class="w-full bg-white rounded-lg p-6 shadow-lg">
+            <mat-tab label="Vols">
+              <app-vols-recherche></app-vols-recherche>
+            </mat-tab>
+            <mat-tab label="Hôtels">
+              <app-hotels-search></app-hotels-search>
+            </mat-tab>
+            <mat-tab label="Vol + Hôtels">
+              <app-package-search></app-package-search>
+            </mat-tab>
+           
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+  <section class="featured-destinations">
+    <h2>Destinations en vedette</h2>
+    <div class="destination-grid">
+      <mat-card *ngFor="let destination of featuredDestinations" class="destination-card">
+        <img mat-card-image [src]="destination.imageUrl" [alt]="destination.name">
+        <mat-card-content>
+          <h3>{{ destination.name }}</h3>
+          <p class="country">{{ destination.country }}</p>
+          <p class="description">{{ destination.description }}</p>
+          <div class="price-rating">
+            <span class="price">{{ destination.price | currency:'EUR' }}</span>
+            <span class="rating">
+              <mat-icon>star</mat-icon>
+              {{ destination.rating }}
+            </span>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary">En savoir plus</button>
+          <button mat-raised-button color="accent">Réserver</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </section>
+
+  <section class="why-choose-us">
+    <h2>Pourquoi nous choisir ?</h2>
+    <div class="reasons-grid">
+      <div class="reason">
+        <mat-icon>flight</mat-icon>
+        <h3>Destinations uniques</h3>
+        <p>Des lieux extraordinaires soigneusement sélectionnés</p>
+      </div>
+      <div class="reason">
+        <mat-icon>hotel</mat-icon>
+        <h3>Hébergements de qualité</h3>
+        <p>Des logements confortables et authentiques</p>
+      </div>
+      <div class="reason">
+        <mat-icon>local_activity</mat-icon>
+        <h3>Expériences locales</h3>
+        <p>Immergez-vous dans la culture locale</p>
+      </div>
+      <div class="reason">
+        <mat-icon>support_agent</mat-icon>
+        <h3>Support 24/7</h3>
+        <p>Une équipe à votre écoute à tout moment</p>
+      </div>
+    </div>
+  </section>
+</div>

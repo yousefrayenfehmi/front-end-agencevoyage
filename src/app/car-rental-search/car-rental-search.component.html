@@ -1,0 +1,75 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title class="flex items-center gap-2">
+        <mat-icon>directions_car</mat-icon>
+        Location de Voiture
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="grid-container">
+        <mat-form-field class="form-field">
+          <mat-label>Lieu de prise en charge</mat-label>
+          <input matInput placeholder="Lieu de prise en charge" />
+        </mat-form-field>
+  
+        <mat-form-field class="form-field">
+          <mat-label>Lieu de restitution</mat-label>
+          <input matInput placeholder="Lieu de restitution" />
+        </mat-form-field>
+      </div>
+  
+      <div class="grid-container">
+        <div class="grid-container">
+          <mat-form-field class="form-field">
+            <mat-label>Date</mat-label>
+            <input matInput type="date" />
+          </mat-form-field>
+          <mat-form-field class="form-field">
+            <mat-label>Heure</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let hour of hours" [value]="hour">{{hour}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+  
+        <div class="grid-container">
+          <mat-form-field class="form-field">
+            <mat-label>Date</mat-label>
+            <input matInput type="date" />
+          </mat-form-field>
+          <mat-form-field class="form-field">
+            <mat-label>Heure</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let hour of hours" [value]="hour">{{hour}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <div class="grid-container">
+        <mat-form-field class="form-field">
+          <mat-label>Type de véhicule</mat-label>
+          <mat-select>
+            <mat-option value="economy">Économique</mat-option>
+            <mat-option value="compact">Compact</mat-option>
+            <mat-option value="intermediate">Intermédiaire</mat-option>
+            <mat-option value="luxury">Luxe</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field class="form-field">
+          <mat-label>Âge du conducteur</mat-label>
+          <mat-select>
+            <mat-option value="23-">23 ans ou moins</mat-option>
+            <mat-option value="24-65">24-65 ans</mat-option>
+            <mat-option value="65+">Plus de 65 ans</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  
+      <button mat-raised-button color="primary" class="full-width">
+        Rechercher des voitures
+      </button>
+    </mat-card-content>
+  </mat-card>
+  

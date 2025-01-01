@@ -1,0 +1,36 @@
+<div class="container">
+    <h2 class="text-xl font-semibold mb-4">Gestion des Hotels</h2>
+    <button (click)="handleAdd('hotels')" class="add-button mb-4">
+      Ajouter un Hotel
+    </button>
+    <table class="hotel-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Emplacement</th>
+          <th>Note</th>
+          <th>Prix par nuit</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let hotel of hotels">
+          <td>{{ hotel.id }}</td>
+          <td>{{ hotel.name }}</td>
+          <td>{{ hotel.location }}</td>
+          <td>{{ hotel.rating }} </td>
+          <td>{{ hotel.pricePerNight }} €</td>
+          <td>
+            <button (click)="handleEdit('Hotels', hotel)" class="edit-button">
+              Modifier
+            </button>
+            <button (click)="handleDelete('hotels', hotel.id)" class="delete-button">
+              Supprimer
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

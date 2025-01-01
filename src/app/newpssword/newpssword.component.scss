@@ -1,0 +1,22 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+.container-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.form-outline {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    transition: all 0.2s ease;
+  }

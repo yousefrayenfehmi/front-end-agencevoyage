@@ -1,0 +1,24 @@
+<div class="container-center">
+    <div class="card text-center" style="width: 300px;">
+        <div class="card-header h5 text-white bg-primary">Password Reset</div>
+        <div class="card-body px-5">
+            <p class="card-text py-2">
+                Use the form below to change your password. Your password cannot be the same as your username.
+            </p>
+            <form >
+            <div data-mdb-input-init class="form-outline">
+                <input [(ngModel)]="user.mot_de_passe" type="password" id="typeEmail" class="form-control my-3" (keypress)="presskey()"  [ngModelOptions]="{standalone: true}" />
+                <label class="form-label" for="typeEmail">Enter your new password</label>
+            </div>
+            <div style="color: red;" *ngIf="validpassword==false">
+                The password must contain at least one letter, one number, and one special character.
+            </div>
+            <button type="button" data-mdb-ripple-init class="btn btn-primary w-100" (click)="send()">Reset password</button>
+            <div style="color: red;">
+                {{invalidform}}
+            </div>
+        </form>
+            
+        </div>
+    </div>
+</div>

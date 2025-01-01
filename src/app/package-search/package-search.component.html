@@ -1,0 +1,69 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title class="flex items-center gap-2">
+        <mat-icon>plane</mat-icon>
+        <span>+</span>
+        <mat-icon>hotel</mat-icon>
+        Vol + Hôtel
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="grid-container">
+        <mat-form-field class="form-field">
+          <mat-label>Ville de départ</mat-label>
+          <input matInput placeholder="Ville de départ" />
+        </mat-form-field>
+  
+        <mat-form-field class="form-field">
+          <mat-label>Destination</mat-label>
+          <input matInput placeholder="Destination" />
+        </mat-form-field>
+      </div>
+  
+      <div class="grid-container">
+        <mat-form-field class="form-field">
+          <mat-label>Date de départ</mat-label>
+          <input matInput type="date" />
+        </mat-form-field>
+  
+        <mat-form-field class="form-field">
+          <mat-label>Date de retour</mat-label>
+          <input matInput type="date" />
+        </mat-form-field>
+      </div>
+  
+      <div class="grid-container">
+        <mat-form-field class="form-field">
+          <mat-label>Chambres</mat-label>
+          <mat-select>
+            <mat-option value="1">1 Chambre</mat-option>
+            <mat-option value="2">2 Chambres</mat-option>
+            <mat-option value="3">3 Chambres</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field class="form-field">
+          <mat-label>Adultes</mat-label>
+          <mat-select>
+            <mat-option value="1">1 Adulte</mat-option>
+            <mat-option value="2">2 Adultes</mat-option>
+            <mat-option value="3">3 Adultes</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field class="form-field">
+          <mat-label>Enfants</mat-label>
+          <mat-select>
+            <mat-option value="0">0 Enfant</mat-option>
+            <mat-option value="1">1 Enfant</mat-option>
+            <mat-option value="2">2 Enfants</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  
+      <button mat-raised-button color="primary" class="full-width">
+        Rechercher des forfaits
+      </button>
+    </mat-card-content>
+  </mat-card>
+  

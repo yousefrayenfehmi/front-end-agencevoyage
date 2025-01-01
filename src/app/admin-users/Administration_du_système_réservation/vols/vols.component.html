@@ -1,0 +1,38 @@
+<div class="container">
+    <h2 class="text-xl font-semibold mb-4">Gestion des vols</h2>
+    <button (click)="handleAdd('flights')" class="add-button mb-4">
+      Ajouter un vol
+    </button>
+    <table class="flight-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>De</th>
+          <th>Vers</th>
+          <th>Départ</th>
+          <th>Arrivée</th>
+          <th>Prix</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let flight of flights">
+          <td>{{ flight.id }}</td>
+          <td>{{ flight.from }}</td>
+          <td>{{ flight.to }}</td>
+          <td>{{ flight.departureTime }}</td>
+          <td>{{ flight.arrivalTime }}</td>
+          <td>{{ flight.price }} €</td>
+          <td>
+            <button (click)="handleEdit('flights', flight)" class="edit-button">
+              Modifier
+            </button>
+            <button (click)="handleDelete('flights', flight.id)" class="delete-button">
+              Supprimer
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

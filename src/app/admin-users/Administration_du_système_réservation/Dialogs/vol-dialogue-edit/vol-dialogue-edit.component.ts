@@ -5,6 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatOption } from '@angular/material/core';
 
 @Component({
   selector: 'app-vol-dialogue-edit',
@@ -12,7 +13,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   imports: [MatDialogModule,
       MatInputModule,
       MatFormFieldModule,
-      MatButtonModule, FormsModule,MatCheckboxModule],
+      MatButtonModule, FormsModule,MatCheckboxModule,MatOption],
   templateUrl: './vol-dialogue-edit.component.html',
   styleUrl: './vol-dialogue-edit.component.scss'
 })

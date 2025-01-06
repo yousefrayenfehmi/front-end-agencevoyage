@@ -1,0 +1,211 @@
+:host {
+  display: block;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px; /* Ajouter un peu de marge autour de l'hôte pour que le contenu ne touche pas les bords */
+  margin-top: 150px;
+}
+
+.card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 24px;
+  position: relative;
+  margin-bottom: 24px; /* Ajoute de l'espace entre les cartes verticalement */
+}
+
+.card:last-child {
+  margin-bottom: 0; /* Enlever la marge du bas pour la dernière carte */
+}
+
+.best-option {
+  background: #10b981;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px 4px 0 0;
+  position: absolute;
+  top: -16px;
+  left: 24px;
+  font-weight: 500;
+}
+
+.flight-section {
+  padding: 24px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.flight-section:last-child {
+  border-bottom: none;
+}
+
+.flight-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.flight-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6b7280;
+}
+
+.direction {
+  font-weight: 500;
+}
+
+.luggage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.flight-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 48px;
+}
+
+.time-location .time {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.time-location .airport {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.flight-duration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.flight-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.line {
+  width: 96px;
+  height: 2px;
+  background: #e5e7eb;
+}
+
+.direct-badge {
+  background: #f3f4f6;
+  color: #6b7280;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.co2-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #10b981;
+  margin-top: 24px;
+  font-weight: 500;
+}
+
+.pricing-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.regular-price,
+.discounted-price {
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.regular-price {
+  border: 1px solid #e5e7eb;
+}
+
+.discounted-price {
+  background: #f97316;
+  color: white;
+  position: relative;
+}
+
+.savings-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #10b981;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.price-container {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.original-price {
+  text-decoration: line-through;
+  font-size: 14px;
+}
+
+.price-info {
+  font-size: 14px;
+  color: inherit;
+  opacity: 0.8;
+}
+
+.trial-info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.prime-logo {
+  height: 20px;
+  margin-top: 8px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .flight-details {
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .pricing-section {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    margin-bottom: 16px; /* Pour les petits écrans, vous pouvez réduire l'espacement */
+  }
+}

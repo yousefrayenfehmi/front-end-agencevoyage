@@ -13,12 +13,12 @@
 
     <mat-form-field class="form-field">
       <mat-label>Départ</mat-label>
-      <input matInput [(ngModel)]="flight.departureTime" name="departureTime" required>
+      <input matInput [(ngModel)]="flight.departureTime" name="departureTime" type="datetime-local" required>
     </mat-form-field>
 
     <mat-form-field class="form-field">
       <mat-label>Arrivée</mat-label>
-      <input matInput [(ngModel)]="flight.arrivalTime" name="arrivalTime" required>
+      <input matInput [(ngModel)]="flight.arrivalTime" name="arrivalTime" type="datetime-local" required>
     </mat-form-field>
 
     <mat-form-field class="form-field full-width">
@@ -27,7 +27,7 @@
     </mat-form-field>
 
     <!-- Nouveau champ: Vol direct (checkbox) -->
-    <mat-checkbox [(ngModel)]="isDirect" name="isDirect">Vol direct</mat-checkbox>
+    <mat-checkbox [(ngModel)]="isDirect" name="isDirect" required>Vol direct</mat-checkbox>
 
     <!-- Nouveau champ: Société de transport -->
     <mat-form-field class="form-field full-width">
@@ -38,7 +38,17 @@
     <!-- Nouveau champ: Description du voyage -->
     <mat-form-field class="form-field full-width">
       <mat-label>Description du voyage</mat-label>
-      <textarea matInput [(ngModel)]="flight.description" name="description"></textarea>
+      <textarea matInput [(ngModel)]="flight.description" name="description" required></textarea>
+    </mat-form-field>
+
+    <!-- Nouveau champ: Classe de voyage -->
+    <mat-form-field class="form-field full-width">
+      <mat-label>Classe de voyage</mat-label>
+      <mat-select [(ngModel)]="flight.travelClass" name="travelClass" required>
+        <mat-option value="economique">Économique</mat-option>
+        <mat-option value="affaires">Affaires</mat-option>
+        <mat-option value="premiere">Première classe</mat-option>
+      </mat-select>
     </mat-form-field>
 
     <div class="grid-container">

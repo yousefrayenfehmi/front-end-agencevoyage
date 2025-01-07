@@ -15,12 +15,11 @@ import { FlightCardComponent } from "../flight-card/flight-card.component";
 import { VolsComponent } from '../admin-users/Administration_du_système_réservation/vols/vols.component';
 import { VolService } from '../vol.service';
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIconModule, CommonModule, MatFormFieldModule,
-    MatInputModule, VolsRechercheComponent, MatTabsModule, HotelsSearchComponent, PackageSearchComponent, CarRentalSearchComponent, FlightCardComponent],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+    selector: 'app-home',
+    imports: [MatCardModule, MatButtonModule, MatIconModule, CommonModule, MatFormFieldModule,
+        MatInputModule, VolsRechercheComponent, MatTabsModule, HotelsSearchComponent, PackageSearchComponent, CarRentalSearchComponent, FlightCardComponent],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
 

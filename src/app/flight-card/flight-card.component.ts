@@ -15,11 +15,10 @@ interface Flight {
 }
 
 @Component({
-  selector: 'app-flight-card',
-  standalone: true,
-  imports: [NgIf, CommonModule],
-  templateUrl: './flight-card.component.html',
-  styleUrls: ['./flight-card.component.scss']
+    selector: 'app-flight-card',
+    imports: [NgIf, CommonModule],
+    templateUrl: './flight-card.component.html',
+    styleUrls: ['./flight-card.component.scss']
 })
 export class FlightCardComponent implements OnInit {
   flights: any[] = [];

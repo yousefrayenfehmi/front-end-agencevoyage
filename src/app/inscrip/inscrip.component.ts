@@ -6,11 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-inscrip',
-  standalone: true,
-  imports: [FormsModule,NgIf, HttpClientModule],
-  templateUrl: './inscrip.component.html',
-  styleUrl: './inscrip.component.scss'
+    selector: 'app-inscrip',
+    imports: [FormsModule, NgIf, HttpClientModule],
+    templateUrl: './inscrip.component.html',
+    styleUrl: './inscrip.component.scss'
 })
 
 

@@ -11,21 +11,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-vol-dialog',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    FormsModule,
-    MatCheckboxModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule
-  ],
-  templateUrl: './vol-dialog.component.html',
-  styleUrls: ['./vol-dialog.component.scss']
+    selector: 'app-vol-dialog',
+    imports: [
+        MatDialogModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        FormsModule,
+        MatCheckboxModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule
+    ],
+    templateUrl: './vol-dialog.component.html',
+    styleUrls: ['./vol-dialog.component.scss']
 })
 export class VolDialogComponent {
 

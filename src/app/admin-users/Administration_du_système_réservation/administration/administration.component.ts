@@ -6,11 +6,10 @@ import { VolsComponent } from "../vols/vols.component";
 import { HotelComponent } from "../hotel/hotel.component";
 
 @Component({
-  selector: 'app-administration',
-  standalone: true,
-  imports: [MatTabGroup, MatTab, VolsComponent, HotelComponent],
-  templateUrl: './administration.component.html',
-  styleUrl: './administration.component.scss'
+    selector: 'app-administration',
+    imports: [MatTabGroup, MatTab, VolsComponent, HotelComponent],
+    templateUrl: './administration.component.html',
+    styleUrl: './administration.component.scss'
 })
 export class AdministrationComponent {
   activeTab: string = 'hotels';

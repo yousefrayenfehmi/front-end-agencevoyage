@@ -12,20 +12,19 @@ import { NgIf } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
-  selector: 'app-vols-recherche',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatInputModule,
-    MatSelectModule,
-    MatIconModule,
-    MatCardModule,
-    FormsModule,
-    NgIf,
-    MatRadioModule
-  ],
-  templateUrl: './vols-recherche.component.html',
-  styleUrl: './vols-recherche.component.scss'
+    selector: 'app-vols-recherche',
+    imports: [
+        MatButtonModule,
+        MatInputModule,
+        MatSelectModule,
+        MatIconModule,
+        MatCardModule,
+        FormsModule,
+        NgIf,
+        MatRadioModule
+    ],
+    templateUrl: './vols-recherche.component.html',
+    styleUrl: './vols-recherche.component.scss'
 })
 export class VolsRechercheComponent {
   @Input() activeTab: string = 'flights';

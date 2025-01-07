@@ -7,14 +7,13 @@ import { MatInputModule } from '@angular/material/input';
 
 
 @Component({
-  selector: 'app-hotel-dialoge',
-  standalone: true,
- imports: [ MatDialogModule,
-     MatInputModule,
-     MatFormFieldModule,
-     MatButtonModule, FormsModule],
-  templateUrl: './hotel-dialoge.component.html',
-  styleUrl: './hotel-dialoge.component.scss'
+    selector: 'app-hotel-dialoge',
+    imports: [MatDialogModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatButtonModule, FormsModule],
+    templateUrl: './hotel-dialoge.component.html',
+    styleUrl: './hotel-dialoge.component.scss'
 })
 export class HotelDialogeComponent {
 constructor(public dialogRef: MatDialogRef<HotelDialogeComponent>) {}

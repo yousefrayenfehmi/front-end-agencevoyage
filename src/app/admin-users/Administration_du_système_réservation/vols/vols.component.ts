@@ -6,11 +6,10 @@ import { VolDialogueEditComponent } from '../Dialogs/vol-dialogue-edit/vol-dialo
 import { VolService } from '../../../vol.service';
 
 @Component({
-  selector: 'app-vols',
-  standalone: true,
-  imports: [NgFor,NgIf],
-  templateUrl: './vols.component.html',
-  styleUrls: ['./vols.component.scss']
+    selector: 'app-vols',
+    imports: [NgFor, NgIf],
+    templateUrl: './vols.component.html',
+    styleUrls: ['./vols.component.scss']
 })
 export class VolsComponent {
   flights :any[] = [];

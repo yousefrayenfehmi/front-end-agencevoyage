@@ -5,11 +5,10 @@ import { HotelDialogeComponent } from '../Dialogs/hotel-dialoge/hotel-dialoge.co
 import { HotelDialogeEditComponent } from '../Dialogs/hotel-dialoge-edit/hotel-dialoge-edit.component';
 
 @Component({
-  selector: 'app-hotel',
-  standalone: true,
-  imports: [NgFor,NgIf],
-  templateUrl: './hotel.component.html',
-  styleUrls: ['./hotel.component.scss']
+    selector: 'app-hotel',
+    imports: [NgFor, NgIf],
+    templateUrl: './hotel.component.html',
+    styleUrls: ['./hotel.component.scss']
 })
 export class HotelComponent {
   hotel = [

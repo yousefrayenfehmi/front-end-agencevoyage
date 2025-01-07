@@ -8,14 +8,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatOption } from '@angular/material/core';
 
 @Component({
-  selector: 'app-vol-dialogue-edit',
-  standalone: true,
-  imports: [MatDialogModule,
-      MatInputModule,
-      MatFormFieldModule,
-      MatButtonModule, FormsModule,MatCheckboxModule,MatOption],
-  templateUrl: './vol-dialogue-edit.component.html',
-  styleUrl: './vol-dialogue-edit.component.scss'
+    selector: 'app-vol-dialogue-edit',
+    imports: [MatDialogModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatButtonModule, FormsModule, MatCheckboxModule, MatOption],
+    templateUrl: './vol-dialogue-edit.component.html',
+    styleUrl: './vol-dialogue-edit.component.scss'
 })
 export class VolDialogueEditComponent {
   flight: any;

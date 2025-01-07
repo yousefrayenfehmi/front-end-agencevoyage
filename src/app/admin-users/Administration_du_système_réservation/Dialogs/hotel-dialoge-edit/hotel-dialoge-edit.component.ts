@@ -6,14 +6,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-hotel-dialoge-edit',
-  standalone: true,
- imports: [ MatDialogModule,
-      MatInputModule,
-      MatFormFieldModule,
-      MatButtonModule, FormsModule],
-  templateUrl: './hotel-dialoge-edit.component.html',
-  styleUrl: './hotel-dialoge-edit.component.scss'
+    selector: 'app-hotel-dialoge-edit',
+    imports: [MatDialogModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatButtonModule, FormsModule],
+    templateUrl: './hotel-dialoge-edit.component.html',
+    styleUrl: './hotel-dialoge-edit.component.scss'
 })
 export class HotelDialogeEditComponent {
   Hotel: any;

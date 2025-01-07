@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { VolService } from '../vol.service';
+import { ServiceService } from '../service.service';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
@@ -30,11 +30,22 @@ import { MatRadioModule } from '@angular/material/radio';
 export class VolsRechercheComponent {
   @Input() activeTab: string = 'flights';
   vol: any[] = [];
+  airports:any[]=[]
+  constructor(private Service: ServiceService, private router: Router) {
 
-  constructor(private volService: VolService, private router: Router) {
-    this.vol = volService.flights;
+  }
+  ngOnInit(): void {
+    this.getAirpots();
+    
   }
 
+  // Get all airlines
+  getAirpots() {
+    this.Service.getAllAirports().subscribe((response) => {
+      this.airports = response;
+      console.log(this.airports)
+    });
+  }
   vols = {
     depart: '',
     arrivee: '',

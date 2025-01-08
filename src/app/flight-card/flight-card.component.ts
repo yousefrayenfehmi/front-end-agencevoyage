@@ -4,6 +4,7 @@ import { VolService } from '../vol.service';
 import { Router } from '@angular/router';
 
 interface Flight {
+  id:string;
   direction: string;
   airline: string;
   departureTime: string;
@@ -29,19 +30,20 @@ export class FlightCardComponent implements OnInit {
   outboundFlight: Flight[] = []; // Array of flights
   returnFlight: Flight[] = []; // Array of flights
 
-  regularPrice :number=0;
-  discountedPrice :number=0;
-  savings = 40;
+  savings=40
 
   constructor(private service: VolService, private router: Router) {}
 
   ngOnInit(): void {
+    console.log(history.state.vole);
+    
     if (history.state && history.state.allerVol) {
       this.allerVol = history.state.allerVol;
       console.log('Aller Vol:', this.allerVol);
       this.allerVol.forEach((flight) => {
         this.outboundFlight.push({
           direction: "Aller",
+          id: flight.id,
           airline: flight.transportCompany,
           departureTime: flight.departureTime,
           departureAirport: flight.from,
@@ -59,6 +61,7 @@ export class FlightCardComponent implements OnInit {
       this.retourVol.forEach((flight) => {
         this.returnFlight.push({
           direction: "Retour",
+          id: flight.id,
           airline: flight.transportCompany,
           departureTime: flight.departureTime,
           departureAirport: flight.from,
@@ -68,9 +71,15 @@ export class FlightCardComponent implements OnInit {
           price: flight.price
         });
       })
-      this.regularPrice = this.outboundFlight[0].price + this.returnFlight[0].price;
-    this.discountedPrice = this.regularPrice - this.savings;
     }
-    
+   
   }
+
+  commande(voles:any){
+    console.log(voles);
+    
+    this.router.navigate(['/put'], { state: { vole: voles,uservol:history.state.vole} });
+    
+}
+  
 }

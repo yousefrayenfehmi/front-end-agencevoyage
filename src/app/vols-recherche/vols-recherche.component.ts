@@ -60,7 +60,7 @@ export class VolsRechercheComponent {
     if (this.vols.type === 'aller-simple') {
       if (allerVol && allerVol.length > 0) { 
         this.router.navigate(['/check'], {
-          state: { allerVol: allerVol }
+          state: { allerVol: allerVol,vole:this.vols }
         });      } else {
         console.log('Aucun vol aller trouvé');
       }
@@ -76,7 +76,7 @@ export class VolsRechercheComponent {
 
       if (allerVol && allerVol.length > 0 && retourVol && retourVol.length > 0) {
         this.router.navigate(['/check'], {
-          state: { allerVol: allerVol, retourVol: retourVol }
+          state: { allerVol: allerVol, retourVol: retourVol,vole:this.vols }
         });      } else {
         console.log('Aucun vol aller ou retour trouvé');
       }

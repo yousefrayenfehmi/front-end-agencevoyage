@@ -9,26 +9,28 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>De</th>
-        <th>Vers</th>
-        <th>Départ</th>
-        <th>Arrivée</th>
-        <th>Société</th>
-        <th>Type de vol</th>
-        <th>Prix</th>
+        <th>Ville de départ</th>
+        <th>Ville d'arrivée</th>
+        <th>Date de départ</th>
+        <th>Date d'arrivée</th>
+        <th>Compagnie aérienne</th>
+        <th>Classe</th>
+        <th>Prix (€)</th>
+        <th>Places disponibles</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let flight of paginatedData">
-        <td>{{ flight.id }}</td>
-        <td>{{ flight.from }}</td>
-        <td>{{ flight.to }}</td>
-        <td>{{ flight.departureTime }}</td>
-        <td>{{ flight.arrivalTime }}</td>
-        <td>{{ flight.transportCompany }}</td>
-        <td>{{ flight.type }}</td>
-        <td>{{ flight.price }} €</td>
+        <td>{{ flight._id }}</td>
+        <td>{{ flight.villeDepart.name }}</td>
+        <td>{{ flight.villeArrivee.name }}</td>
+        <td>{{ flight.dateDepart | date: 'short' }}</td>
+        <td>{{ flight.dateArrivee | date: 'short' }}</td>
+        <td>{{ flight.compagnieAerienne.name }}</td>
+        <td>{{ flight.classe }}</td>
+        <td>{{ flight.prix }}</td>
+        <td>{{ flight.nombrePlaces }}</td>
         <td>
           <div class="actions-container">
             <button (click)="handleEdit('flights', flight)" class="edit-button">
@@ -42,7 +44,6 @@
             </button>
           </div>
         </td>
-        
       </tr>
     </tbody>
   </table>
@@ -62,14 +63,27 @@
   <div *ngIf="selectedFlight" class="description-modal">
     <div class="modal-content">
       <h3>Description du vol</h3>
-      <p><strong>De:</strong> {{ selectedFlight.from }}</p>
-      <p><strong>Vers:</strong> {{ selectedFlight.to }}</p>
-      <p><strong>Départ:</strong> {{ selectedFlight.departureTime }}</p>
-      <p><strong>Arrivée:</strong> {{ selectedFlight.arrivalTime }}</p>
-      <p><strong>Société:</strong> {{ selectedFlight.transportCompany }}</p>
-      <p><strong>Type de vol:</strong> {{ selectedFlight.type }}</p>
-      <p><strong>Prix:</strong> {{ selectedFlight.price }} €</p>
+      <p><strong>Ville de départ:</strong> {{ selectedFlight.villeDepart.name }}</p>
+      <p><strong>Ville d'arrivée:</strong> {{ selectedFlight.villeArrivee.name }}</p>
+      <p><strong>Date de départ:</strong> {{ selectedFlight.dateDepart | date: 'fullDate' }}</p>
+      <p><strong>Date d'arrivée:</strong> {{ selectedFlight.dateArrivee | date: 'fullDate' }}</p>
+      <p><strong>Compagnie aérienne:</strong> {{ selectedFlight.compagnieAerienne.name }}</p>
+      <p><strong>Classe:</strong> {{ selectedFlight.classe }}</p>
+      <p><strong>Prix:</strong> {{ selectedFlight.prix }} €</p>
+      <p><strong>Places disponibles:</strong> {{ selectedFlight.nombrePlaces }}</p>
+      <p><strong>Escales:</strong></p>
+      <ul>
+        <li *ngFor="let escale of selectedFlight.escales">
+          - {{ escale.airport.name }} ({{ escale.duration }} min)
+        </li>
+      </ul>
       <p><strong>Description:</strong> {{ selectedFlight.description }}</p>
+      <div *ngIf="selectedFlight.photos?.length">
+        <p><strong>Photos:</strong></p>
+        <div class="photo-gallery">
+          <img *ngFor="let photo of selectedFlight.photos" [src]="photo" alt="Vol photo" />
+        </div>
+      </div>
       <button (click)="closeDescription()" class="close-button">
         Fermer
       </button>

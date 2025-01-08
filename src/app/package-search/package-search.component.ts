@@ -6,15 +6,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  selector: 'app-package-search',
-  standalone: true,
-imports: [ MatButtonModule,
-    MatInputModule,
-    MatSelectModule,
-    MatIconModule,
-    MatCardModule],
-  templateUrl: './package-search.component.html',
-  styleUrl: './package-search.component.scss'
+    selector: 'app-package-search',
+    imports: [MatButtonModule,
+        MatInputModule,
+        MatSelectModule,
+        MatIconModule,
+        MatCardModule],
+    templateUrl: './package-search.component.html',
+    styleUrl: './package-search.component.scss'
 })
 export class PackageSearchComponent {
 

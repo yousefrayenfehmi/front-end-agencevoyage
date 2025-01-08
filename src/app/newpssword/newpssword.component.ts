@@ -5,11 +5,10 @@ import { ActivatedRoute } from '@angular/router';
 import { ServiceService } from '../service.service';
 
 @Component({
-  selector: 'app-newpssword',
-  standalone: true,
-  imports: [FormsModule,NgIf],
-  templateUrl: './newpssword.component.html',
-  styleUrl: './newpssword.component.scss'
+    selector: 'app-newpssword',
+    imports: [FormsModule, NgIf],
+    templateUrl: './newpssword.component.html',
+    styleUrl: './newpssword.component.scss'
 })
 export class NewpsswordComponent {
   invalidform=''

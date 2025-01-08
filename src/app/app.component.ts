@@ -5,16 +5,16 @@ import { NgIf } from '@angular/common';
 import { ServiceService } from './service.service';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, InscripComponent,NgIf,RouterLink],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    standalone: true,
+    imports: [RouterOutlet, InscripComponent, NgIf, RouterLink],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'agence_voyage';
   token: string | null = null;  // Declare token
-
+  
   constructor(private _service: ServiceService) {
     console.log("navvupdate");
   }
@@ -25,4 +25,5 @@ export class AppComponent {
       console.log(this.token);
       
   }
+  
 }

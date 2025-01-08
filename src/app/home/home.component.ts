@@ -11,22 +11,27 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { HotelsSearchComponent } from "../hotels-search/hotels-search.component";
 import { PackageSearchComponent } from "../package-search/package-search.component";
 import { CarRentalSearchComponent } from "../car-rental-search/car-rental-search.component";
+import { FlightCardComponent } from "../flight-card/flight-card.component";
+import { VolsComponent } from '../admin-users/Administration_du_système_réservation/vols/vols.component';
+import { VolService } from '../vol.service';
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIconModule, CommonModule, MatFormFieldModule,
-    MatInputModule, VolsRechercheComponent, MatTabsModule, HotelsSearchComponent, PackageSearchComponent, CarRentalSearchComponent],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+    selector: 'app-home',
+    imports: [MatCardModule, MatButtonModule, MatIconModule, CommonModule, MatFormFieldModule,
+        MatInputModule, VolsRechercheComponent, MatTabsModule, HotelsSearchComponent, PackageSearchComponent, CarRentalSearchComponent, FlightCardComponent],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
 
   featuredDestinations: Destination[] = [];
-
+  vols:any[]=[];
   constructor(private destinationService: DestinationService) {}
-
   ngOnInit() {
       
       this.featuredDestinations = this.destinationService.getDestinations();
+      
+      
   }
+
+
 }

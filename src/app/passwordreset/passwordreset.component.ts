@@ -3,11 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { ServiceService } from '../service.service';
 
 @Component({
-  selector: 'app-passwordreset',
-  standalone: true,
-  imports: [FormsModule],
-  templateUrl: './passwordreset.component.html',
-  styleUrl: './passwordreset.component.scss'
+    selector: 'app-passwordreset',
+    imports: [FormsModule],
+    templateUrl: './passwordreset.component.html',
+    styleUrl: './passwordreset.component.scss'
 })
 export class PasswordresetComponent {
   invaliform=''

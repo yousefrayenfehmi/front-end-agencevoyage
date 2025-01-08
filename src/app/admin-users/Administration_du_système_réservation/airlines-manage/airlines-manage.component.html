@@ -1,0 +1,64 @@
+<div class="container">
+    <h2 class="text-xl font-semibold mb-4">Gestion des Compagnies Aériennes</h2>
+    <button (click)="handleAdd('airline')" class="add-button mb-4">
+      Ajouter une Compagnie Aérienne
+    </button>
+
+    <!-- Table des Compagnies Aériennes -->
+    <table class="airline-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Code IATA</th>
+          <th>Pays</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let airline of paginatedData">
+          <td>{{ airline.id }}</td>
+          <td>{{ airline.name }}</td>
+          <td>{{ airline.iataCode }}</td>
+          <td>{{ airline.country }}</td>
+          <td>
+            <div class="actions-container">
+              <button (click)="handleEdit('airline', airline)" class="edit-button">
+                Modifier
+              </button>
+              <button (click)="handleDelete('airline', airline.id)" class="delete-button">
+                Supprimer
+              </button>
+              <button (click)="showDescription(airline)" class="view-description-button">
+                Voir détails
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination-container">
+      <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-button">
+        Page Précédente
+      </button>
+      <span>Page {{ currentPage }} / {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-button">
+        Page Suivante
+      </button>
+    </div>
+
+    <!-- Description Modal -->
+    <div *ngIf="selectedAirline" class="description-modal">
+      <div class="modal-content">
+        <h3>Détails de la Compagnie Aérienne</h3>
+        <p><strong>Nom:</strong> {{ selectedAirline.name }}</p>
+        <p><strong>Code IATA:</strong> {{ selectedAirline.iataCode }}</p>
+        <p><strong>Pays:</strong> {{ selectedAirline.country }}</p>
+        <button (click)="closeDescription()" class="close-button">
+          Fermer
+        </button>
+      </div>
+    </div>
+</div>

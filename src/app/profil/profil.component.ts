@@ -4,11 +4,10 @@ import { ServiceService } from '../service.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Add this line
 @Component({
-  selector: 'app-profil',
-  standalone: true,
-  imports: [CommonModule,FormsModule ],
-  templateUrl: './profil.component.html',
-  styleUrl: './profil.component.scss'
+    selector: 'app-profil',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './profil.component.html',
+    styleUrl: './profil.component.scss'
 })
 export class ProfilComponent implements OnInit {
 

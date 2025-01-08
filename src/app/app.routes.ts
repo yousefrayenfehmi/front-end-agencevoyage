@@ -7,6 +7,7 @@ import { ProfilComponent } from './profil/profil.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { HomeComponent } from './home/home.component';
 import { AdministrationComponent } from './admin-users/Administration_du_système_réservation/administration/administration.component';
+import { FlightCardComponent } from './flight-card/flight-card.component';
 
 export const routes: Routes = [
     {path:'login',component:LoginComponent},
@@ -16,6 +17,7 @@ export const routes: Routes = [
     {path:'reset-password/:token',component:NewpsswordComponent},
     { path: 'admin/users', component: AdminUsersComponent },
     {path:'admin/admis',component:AdministrationComponent},
-    {path:'',component:HomeComponent}
+    {path:'',component:HomeComponent},
+    {path:'check',component:FlightCardComponent}
 
 ];

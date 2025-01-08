@@ -4,11 +4,11 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-admin-users',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './admin-users.component.html',
-  styleUrl: './admin-users.component.scss'
+    selector: 'app-admin-users',
+    standalone: true,
+    imports: [CommonModule],
+    templateUrl: './admin-users.component.html',
+    styleUrl: './admin-users.component.scss'
 })
 
 export class AdminUsersComponent implements OnInit {

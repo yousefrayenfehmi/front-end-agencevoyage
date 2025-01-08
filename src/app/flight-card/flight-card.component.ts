@@ -4,6 +4,7 @@ import { VolService } from '../vol.service';
 import { Router } from '@angular/router';
 
 interface Flight {
+  id:string;
   direction: string;
   airline: string;
   departureTime: string;
@@ -31,12 +32,15 @@ export class FlightCardComponent implements OnInit {
   regularPrice: number = 0;
   discountedPrice: number = 0;
   savings = 40;
+  
 
   constructor(private service: VolService, private router: Router) {}
 
   ngOnInit(): void {
-    if (history.state && history.state.allerVol) {
-      this.allerVol = history.state.allerVol;
+    console.log(history.state);
+    
+    if (history.state && history.state.voles) {
+      this.allerVol = history.state.voles;
       console.log('Aller Vol:', this.allerVol);
       this.allerVol.forEach((flight) => {
         this.outboundFlight.push({
@@ -47,28 +51,25 @@ export class FlightCardComponent implements OnInit {
           arrivalTime: new Date(flight.dateArrivee).toLocaleString(),
           arrivalAirport: flight.villeArrivee.name,
           isDirect: flight.escales.length === 0 ? 'direct' : 'indirect',
-          price: flight.prix
+          price: flight.prix,
+          id: flight._id,
+          
         });
       });
     }
 
-    if (history.state && history.state.retourVol) {
-      this.retourVol = history.state.retourVol;
-      console.log('Retour Vol:', this.retourVol);
-      this.retourVol.forEach((flight) => {
-        this.returnFlight.push({
-          direction: "Retour",
-          airline: flight.compagnieAerienne.name,
-          departureTime: new Date(flight.dateDepart).toLocaleString(),
-          departureAirport: flight.villeDepart.name,
-          arrivalTime: new Date(flight.dateArrivee).toLocaleString(),
-          arrivalAirport: flight.villeArrivee.name,
-          isDirect: flight.escales.length === 0 ? 'direct' : 'indirect',
-          price: flight.prix
-        });
-      });
-      this.regularPrice = this.outboundFlight[0].price + this.returnFlight[0].price;
-      this.discountedPrice = this.regularPrice - this.savings;
+    
+         
+      
     }
-  }
+   
+  
+
+  commande(voles:any){
+    console.log(voles);
+    
+    this.router.navigate(['/put'], { state: { vole: voles,uservol:history.state.userInfo} });
+    
+}
+  
 }

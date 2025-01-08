@@ -1,0 +1,49 @@
+.w-full {
+    margin-top: 150px;
+    width: 100%;
+  }
+  
+  .max-w-2xl {
+    max-width: 640px;
+  }
+  
+  .text-muted-foreground {
+    color: #6b7280;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .gap-2 {
+    gap: 0.5rem;
+  }
+  
+  .gap-4 {
+    gap: 1rem;
+  }
+  
+  .space-y-1 {
+    margin-bottom: 0.25rem;
+  }
+  
+  .space-y-2 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .grid {
+    display: grid;
+  }
+  
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .mt-4 {
+    margin-top: 1rem;
+  }
+  

@@ -1,11 +1,11 @@
 <div class="card" *ngFor="let outbound of outboundFlight">
-  <div class="best-option">
-    Meilleure option
-  </div>
+  <div class="best-option">Meilleure option</div>
 
+  <!-- Section du vol aller -->
   <div class="flight-section">
     <div class="flight-header">
       <div class="flight-info">
+        <span>{{outbound.id}}</span>
         <span class="direction">{{ outbound.direction }}</span>
         <span class="dot">•</span>
         <span class="airline">{{ outbound.airline }}</span>
@@ -33,53 +33,69 @@
     </div>
   </div>
 
-  <div class="flight-section" *ngFor="let return of returnFlight">
-    <div class="flight-header">
-      <div class="flight-info">
-        <span class="direction">{{ return.direction }}</span>
-        <span class="dot">•</span>
-        <span class="airline">{{ return.airline }}</span>
-      </div>
-    </div>
-
-    <div class="flight-details">
-      <div class="time-location">
-        <div class="time">{{ return.departureTime }}</div>
-        <div class="airport">{{ return.departureAirport }}</div>
-      </div>
-
-      <div class="flight-duration">
-        <div class="flight-line">
-          <div class="line"></div>
-          <i class="fas fa-plane"></i>
+  <!-- Section des vols retour -->
+  <div *ngIf="returnFlight.length > 0">
+    <div class="flight-section" *ngFor="let return of returnFlight">
+      <div class="flight-header">
+        <div class="flight-info">
+          <span class="direction">{{ return.direction }}</span>
+          <span class="dot">•</span>
+          <span class="airline">{{ return.airline }}</span>
         </div>
-        <div class="direct-badge" *ngIf="return.isDirect">direct</div>
       </div>
 
-      <div class="time-location">
-        <div class="time">{{ return.arrivalTime }}</div>
-        <div class="airport">{{ return.arrivalAirport }}</div>
+      <div class="flight-details">
+        <div class="time-location">
+          <div class="time">{{ return.departureTime }}</div>
+          <div class="airport">{{ return.departureAirport }}</div>
+        </div>
+
+        <div class="flight-duration">
+          <div class="flight-line">
+            <div class="line"></div>
+            <i class="fas fa-plane"></i>
+          </div>
+          <div class="direct-badge" *ngIf="return.isDirect">direct</div>
+        </div>
+
+        <div class="time-location">
+          <div class="time">{{ return.arrivalTime }}</div>
+          <div class="airport">{{ return.arrivalAirport }}</div>
+        </div>
+      </div>
+
+      <!-- Section des prix -->
+      <div class="pricing-section">
+        <button class="bt">
+          <div class="regular-price">
+            <h3>Prix non réduit</h3>
+            <div class="price">{{ (return.price + outbound.price) | number:'1.2-2' }} €</div>
+            <div class="price-info">tarif par passager</div>
+          </div>
+        </button>
+        <button class="bt">
+          <div class="discounted-price">
+            <div class="savings-badge">Economisez {{ savings }} € au total</div>
+            <h3>Prix réduit</h3>
+            <div class="price-container">
+              <div class="price">{{ (return.price + outbound.price - savings) | number:'1.2-2' }} €</div>
+              <div class="original-price">{{ (return.price + outbound.price) | number:'1.2-2' }} €</div>
+            </div>
+            <div class="price-info">tarif Prime par passager</div>
+          </div>
+        </button>
       </div>
     </div>
   </div>
 
-  <div class="pricing-section">
-    <div class="regular-price">
-      <h3>Prix non réduit</h3>
-      <div class="price">{{ regularPrice | number:'1.2-2' }} €</div>
-      <div class="price-info">tarif par passager</div>
-    </div>
-
-    <div class="discounted-price">
-      <div class="savings-badge">
-        Economisez {{ savings }} € au total
+  <!-- Pricing section for outbound-only flights -->
+  <div class="pricing-section" *ngIf="returnFlight.length === 0">
+    <button class="bt" (click)="commande(outbound)">
+      <div class="regular-price">
+        <h3>Prix non réduit</h3>
+        <div class="price">{{ outbound.price | number:'1.2-2' }} €</div>
+        <div class="price-info">tarif par passager</div>
       </div>
-      <h3>Prix réduit</h3>
-      <div class="price-container">
-        <div class="price">{{ discountedPrice | number:'1.2-2' }} €</div>
-        <div class="original-price">{{ regularPrice | number:'1.2-2' }} €</div>
-      </div>
-      <div class="price-info">tarif Prime par passager</div>
-    </div>
+    </button>
   </div>
 </div>

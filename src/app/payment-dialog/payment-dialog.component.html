@@ -1,0 +1,16 @@
+<div mat-dialog-content class="dialog-content">
+  <form [formGroup]="paymentForm" class="payment-form">
+    <mat-form-field appearance="fill" class="full-width-field">
+      <mat-label>Mode de paiement</mat-label>
+      <mat-select formControlName="modePaiement" required>
+        <mat-option value="carte">Carte bancaire</mat-option>
+        <mat-option value="paypal">PayPal</mat-option>
+        <mat-option value="cheque">Chèque</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Utilisation de *ngIf pour afficher le bouton PayPal seulement si l'option PayPal est sélectionnée -->
+    <div *ngIf="paymentForm.get('modePaiement')?.value === 'paypal'">
+  </div>
+  </form>
+</div>

@@ -2,7 +2,7 @@
   display: block;
   max-width: 900px;
   margin: 0 auto;
-  padding: 16px; /* Ajouter un peu de marge autour de l'hôte pour que le contenu ne touche pas les bords */
+  padding: 16px; 
   margin-top: 150px;
 }
 
@@ -12,13 +12,29 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   padding: 24px;
   position: relative;
-  margin-bottom: 24px; /* Ajoute de l'espace entre les cartes verticalement */
+  margin-bottom: 24px; 
 }
 
 .card:last-child {
-  margin-bottom: 0; /* Enlever la marge du bas pour la dernière carte */
+  margin-bottom: 0; 
+}
+.bt {
+  background-color: #10b981; /* Background color for the button */
+  color: white; /* Text color */
+  border: none; /* Remove default border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 16px; /* Padding inside the button */
+  display: block; /* Ensure the button takes up full width if needed */
+  width: 100%; /* Adjust width as needed */
+  margin-bottom: 16px; /* Spacing between buttons */
+  cursor: pointer; /* Show pointer on hover */
+  text-align: left; /* Align text to the left */
+  transition: background-color 0.3s ease; /* Smooth hover transition */
 }
 
+.bt:hover {
+  background-color: #0d8b68; /* Darker green on hover */
+}
 .best-option {
   background: #10b981;
   color: white;

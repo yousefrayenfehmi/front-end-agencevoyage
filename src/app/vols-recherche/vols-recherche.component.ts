@@ -31,7 +31,7 @@ import { Airline } from '../airline';
 })
 export class VolsRechercheComponent {
   @Input() activeTab: string = 'flights';
-  vols: any[] = []; // This will store the flight data (not the search criteria)
+  vols: any[] = []; // Flight data
   airports: Airport[] = [];
   airlines: Airline[] = [];
 
@@ -64,41 +64,71 @@ export class VolsRechercheComponent {
   validateInputs(): boolean {
     return (
       this.volSearchCriteria.depart !== null &&
-      this.volSearchCriteria.arrivee !== null &&
-      new Date(this.volSearchCriteria.dateDepart) > new Date()
+      this.volSearchCriteria.arrivee !== null 
     );
   }
 
   search() {
     console.log(this.volSearchCriteria);
+
     if (!this.validateInputs()) {
-      console.log('Veuillez Vérifier tous les champs');
+      console.log('Veuillez vérifier tous les champs');
       return;
     }
-    
-    const allerVol = this.recupererVol();
+
+    const allerVol = this.findVols(
+      this.volSearchCriteria.dateDepart,
+      this.volSearchCriteria.depart,
+      this.volSearchCriteria.arrivee
+    );
 
     if (this.volSearchCriteria.type === 'aller-simple') {
-      if (allerVol && allerVol.length > 0) {
-        this.router.navigate(['/check'], {
-          state: { allerVol: allerVol }
-        });
-      } else {
-        console.log('Aucun vol aller trouvé');
-      }
+      this.handleOneWaySearch(allerVol);
+    } else {
+      this.handleRoundTripSearch(allerVol);
     }
   }
 
-  recupererVol() {
-    const givenDate = new Date(this.volSearchCriteria.dateDepart ?? ''); // Default to empty string if undefined or null
+  handleOneWaySearch(allerVol: any[]) {
+    if (allerVol && allerVol.length > 0) {
+      this.router.navigate(['/check'], {
+        state: { userInfo: this.volSearchCriteria,voles:allerVol }
+      });
+    } else {
+      console.log('Aucun vol aller trouvé');
+    }
+  }
 
-    // Ensure that depart and arrivee are valid objects with _id
-    const foundVol = this.vols.filter(v => 
-      new Date(v.dateDepart) > givenDate &&
-      v.villeDepart?._id === this.volSearchCriteria.depart?._id &&
-      v.villeArrivee?._id === this.volSearchCriteria.arrivee?._id
+  handleRoundTripSearch(allerVol: any[]) {
+    console.log('Recherche pour un aller-retour');
+
+    if (!this.volSearchCriteria.dateDepart) {
+      console.log('Veuillez indiquer une date de retour');
+      return;
+    }
+
+    const retourVol = this.findVols(
+      this.volSearchCriteria.dateDepart, // Replace with the actual return date
+      this.volSearchCriteria.arrivee,
+      this.volSearchCriteria.depart
     );
 
-    return foundVol.length > 0 ? foundVol : null;
+    if (allerVol && allerVol.length > 0 && retourVol && retourVol.length > 0) {
+      this.router.navigate(['/check'], {
+        state: { allerVol: allerVol, retourVol: retourVol }
+      });
+    } else {
+      console.log('Aucun vol aller ou retour trouvé');
+    }
+  }
+
+  findVols(date: string, depart: Airport | null, arrivee: Airport | null) {
+    const searchDate = new Date(date ?? '');
+    return this.vols.filter(
+      (vol) =>
+        new Date(vol.dateDepart) > searchDate &&
+        vol.villeDepart?._id === depart?._id &&
+        vol.villeArrivee?._id === arrivee?._id
+    );
   }
 }

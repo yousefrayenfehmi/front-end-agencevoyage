@@ -2,12 +2,14 @@ import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
+import { AirlinesManageComponent } from '../airlines-manage/airlines-manage.component';
+import { AirpotsManageComponent } from '../airpots-manage/airpots-manage.component';
 import { VolsComponent } from "../vols/vols.component";
-import { HotelComponent } from "../hotel/hotel.component";
 
 @Component({
     selector: 'app-administration',
-    imports: [MatTabGroup, MatTab, VolsComponent, HotelComponent],
+    standalone: true,
+    imports: [MatTabGroup, MatTab, VolsComponent,AirpotsManageComponent,AirlinesManageComponent],
     templateUrl: './administration.component.html',
     styleUrl: './administration.component.scss'
 })

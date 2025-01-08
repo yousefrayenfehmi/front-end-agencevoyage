@@ -1,50 +1,80 @@
 <h2 mat-dialog-title>Ajouter un Vol</h2>
 <mat-dialog-content>
   <form (ngSubmit)="onSubmit()" class="grid-container">
-    
+
+    <!-- Ville de départ -->
     <mat-form-field class="form-field">
-      <mat-label>De</mat-label>
-      <input matInput [(ngModel)]="flight.from" name="from" required>
-    </mat-form-field>
-
-    <mat-form-field class="form-field">
-      <mat-label>Vers</mat-label>
-      <input matInput [(ngModel)]="flight.to" name="to" required>
-    </mat-form-field>
-
-    <mat-form-field class="form-field full-width">
-      <mat-label>Prix</mat-label>
-      <input matInput [(ngModel)]="flight.price" name="price" type="number" required>
-    </mat-form-field>
-
-    <mat-checkbox [(ngModel)]="isDirect" name="isDirect">Vol direct</mat-checkbox>
-
-    <mat-form-field class="form-field full-width">
-      <mat-label>Société de transport</mat-label>
-      <input matInput [(ngModel)]="flight.transportCompany" name="transportCompany" required>
-    </mat-form-field>
-
-    <mat-form-field class="form-field full-width">
-      <mat-label>Description du voyage</mat-label>
-      <textarea matInput [(ngModel)]="flight.description" name="description" required></textarea>
-    </mat-form-field>
-
-    <mat-form-field class="form-field full-width">
-      <mat-label>Classe de voyage</mat-label>
-      <mat-select [(ngModel)]="flight.travelClass" name="travelClass" required>
-        <mat-option value="economique">Économique</mat-option>
-        <mat-option value="affaires">Affaires</mat-option>
-        <mat-option value="premiere">Première classe</mat-option>
+      <mat-label>Ville de départ</mat-label>
+      <mat-select [(ngModel)]="flight.villeDepart" name="villeDepart" required>
+        <mat-option *ngFor="let airport of airports" [value]="airport._id">{{ airport.name }}</mat-option>
       </mat-select>
     </mat-form-field>
 
-    <!-- Calendrier de départ -->
+    <!-- Ville d'arrivée -->
+    <mat-form-field class="form-field">
+      <mat-label>Ville d'arrivée</mat-label>
+      <mat-select [(ngModel)]="flight.villeArrivee" name="villeArrivee" required>
+        <mat-option *ngFor="let airport of airports" [value]="airport._id">{{ airport.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Prix -->
+    <mat-form-field class="form-field full-width">
+      <mat-label>Prix</mat-label>
+      <input matInput [(ngModel)]="flight.prix" name="prix" type="number" required>
+    </mat-form-field>
+
+    <!-- Nombre de places -->
+    <mat-form-field class="form-field full-width">
+      <mat-label>Nombre de places</mat-label>
+      <input matInput [(ngModel)]="flight.nombrePlaces" name="nombrePlaces" type="number" required>
+    </mat-form-field>
+
+    <!-- Société de transport -->
+    <mat-form-field class="form-field full-width">
+      <mat-label>Compagnie aérienne</mat-label>
+      <mat-select [(ngModel)]="flight.compagnieAerienne" name="compagnieAerienne" required>
+        <mat-option *ngFor="let airline of airlines" [value]="airline._id">{{ airline.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Description -->
+    <mat-form-field class="form-field full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="flight.description" name="description"></textarea>
+    </mat-form-field>
+
+    <!-- Classe -->
+    <mat-form-field class="form-field full-width">
+      <mat-label>Classe de voyage</mat-label>
+      <mat-select [(ngModel)]="flight.classe" name="classe" required>
+        <mat-option value="Economique">Économique</mat-option>
+        <mat-option value="Affaires">Affaires</mat-option>
+        <mat-option value="Première">Première classe</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Date de départ -->
     <mat-form-field class="form-field full-width">
       <mat-label>Date de départ</mat-label>
-      <input matInput [matDatepicker]="departureDatePicker" [(ngModel)]="flight.departureTime" name="departureTime" required>
+      <input matInput  [(ngModel)]="flight.dateDepart" type="date" name="dateDepart" required>
       <mat-datepicker #departureDatePicker></mat-datepicker>
     </mat-form-field>
 
+    <!-- Date d'arrivée -->
+    <mat-form-field class="form-field full-width">
+      <mat-label>Date d'arrivée</mat-label>
+      <input matInput  [(ngModel)]="flight.dateArrivee" type="date" name="dateArrivee" required>
+      <mat-datepicker #arrivalDatePicker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Escales -->
+    <mat-form-field class="form-field full-width">
+      <mat-label>Escale</mat-label>
+      <mat-select [(ngModel)]="flight.escales" name="escales" multiple>
+        <mat-option *ngFor="let airport of airports" [value]="airport._id">{{ airport.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <div class="grid-container">
       <button mat-raised-button color="primary" type="submit">Ajouter</button>

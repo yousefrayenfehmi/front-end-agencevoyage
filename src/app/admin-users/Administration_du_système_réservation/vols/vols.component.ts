@@ -4,90 +4,134 @@ import { VolDialogComponent } from '../Dialogs/vol-dialog/vol-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { VolDialogueEditComponent } from '../Dialogs/vol-dialogue-edit/vol-dialogue-edit.component';
 import { VolService } from '../../../vol.service';
+import { ServiceService } from '../../../service.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-vols',
-    imports: [NgFor, NgIf],
+    imports: [NgFor, NgIf,CommonModule ],
+    standalone: true, // Ajoutez cette ligne
     templateUrl: './vols.component.html',
     styleUrls: ['./vols.component.scss']
 })
 export class VolsComponent {
-  flights :any[] = [];
-  itemsPerPage: number = 5;  // Afficher 5 voyages par page
-  currentPage: number = 1;  // Page actuelle
-  totalPages: number = 0;   // Nombre total de pages
-  selectedFlight: any = null;  // Vol sélectionné pour afficher sa description
+  flights: any[] = []; // List of flights
+itemsPerPage: number = 5; // Number of flights per page
+currentPage: number = 1; // Current page number
+totalPages: number = 0; // Total number of pages
+selectedFlight: any = null; // Selected flight for viewing description
+paginatedData: any[] = [];
 
-  constructor(public dialog: MatDialog,private volService:VolService) {}
+constructor(public dialog: MatDialog, private volService: ServiceService) {}
 
-  ngOnInit(): void {
-    this.totalPages = Math.ceil(this.flights.length / this.itemsPerPage);
-    this.flights=this.volService.flights;
-    console.log(this.flights);
-    
+ngOnInit(): void {
+  this.fetchFlights();
+}
+
+fetchFlights(): void {
+  this.volService.getAllVols().subscribe((data: any[]) => {
+    this.flights = data;
+    console.log(this.flights)
+    this.calculatePagination();
+  });
+}
+calculatePagination(): void {
+  this.totalPages = Math.ceil(this.flights.length / this.itemsPerPage);
+  this.updatePaginatedData();
+}
+
+updatePaginatedData(): void {
+  const start = (this.currentPage - 1) * this.itemsPerPage;
+  const end = start + this.itemsPerPage;
+  this.paginatedData = this.flights.slice(start, end);
+}
+/**
+ * Update pagination details based on the flights array.
+ */
+updatePagination(): void {
+  this.totalPages = Math.ceil(this.flights.length / this.itemsPerPage);
+  this.currentPage = Math.min(this.currentPage, this.totalPages || 1);
+}
+
+/**
+ * Navigate to the next page.
+ */
+nextPage(): void {
+  if (this.currentPage < this.totalPages) {
+    this.currentPage++;
   }
+}
 
-  // Méthode pour passer à la page suivante
-  nextPage(): void {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-    }
+/**
+ * Navigate to the previous page.
+ */
+previousPage(): void {
+  if (this.currentPage > 1) {
+    this.currentPage--;
   }
+}
 
-  // Méthode pour passer à la page précédente
-  previousPage(): void {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-    }
+
+
+/**
+ * Handle adding a new flight via a dialog.
+ */
+handleAdd(type: string): void {
+  if (type === 'flights') {
+    const dialogRef = this.dialog.open(VolDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.flights.push(result);
+        this.updatePagination();
+      }
+    });
   }
+}
 
-  // Méthode pour obtenir les données paginées
-  get paginatedData(): any[] {
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    const end = start + this.itemsPerPage;
-    return this.flights.slice(start, end);
-  }
+/**
+ * Handle editing an existing flight via a dialog.
+ */
+handleEdit(type: string, flight: any): void {
+  if (type === 'flights') {
+    const dialogRef = this.dialog.open(VolDialogueEditComponent, { data: flight });
 
-  handleAdd(type: string) {
-    if (type === 'flights') {
-      const dialogRef = this.dialog.open(VolDialogComponent);
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          this.flights.push(result);
-          this.totalPages = Math.ceil(this.flights.length / this.itemsPerPage);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        const index = this.flights.findIndex((f) => f.id === result.id);
+        if (index !== -1) {
+          this.flights[index] = result;
+          this.updatePagination();
         }
-      });
-    }
+      }
+    });
   }
-  showDescription(flight: any) {
-    this.selectedFlight = flight;  // Sélectionner le vol
-  }
+}
 
-  closeDescription() {
-    this.selectedFlight = null;  // Fermer la description
-  }
-  handleEdit(type: string, item: any) {
-    if (type === 'flights') {
-      const dialogRef = this.dialog.open(VolDialogueEditComponent, {
-        data: item  
-      });
-
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          const index = this.flights.findIndex(flight => flight.id === result.id);
-          if (index !== -1) {
-            this.flights[index] = result;
-            this.totalPages = Math.ceil(this.flights.length / this.itemsPerPage);
-          }
-        }
-      });
-    }
-  }
-
-  handleDelete(type: string, id: number) {
-    if (type === 'flights') {
+/**
+ * Handle deleting a flight by ID.
+ */
+handleDelete(type: string, id: number): void {
+  if (type === 'flights') {
+    const confirmDelete = confirm('Êtes-vous sûr de vouloir supprimer ce vol ?');
+    if (confirmDelete) {
       this.flights = this.flights.filter((flight) => flight.id !== id);
-      this.totalPages = Math.ceil(this.flights.length / this.itemsPerPage);
+      this.updatePagination();
     }
   }
+}
+
+/**
+ * Show description of the selected flight.
+ */
+showDescription(flight: any): void {
+  this.selectedFlight = flight;
+}
+
+/**
+ * Close the description modal.
+ */
+closeDescription(): void {
+  this.selectedFlight = null;
+}
 }

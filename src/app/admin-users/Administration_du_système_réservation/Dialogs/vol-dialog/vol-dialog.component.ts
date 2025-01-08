@@ -9,9 +9,14 @@ import { MatNativeDateModule } from '@angular/material/core';  // Importation co
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ServiceService } from '../../../../service.service';
+import { NgFor, NgIf } from '@angular/common';
+import { Airport } from '../../../../airport';
+import { Airline } from '../../../../airline';
 
 @Component({
     selector: 'app-vol-dialog',
+    standalone: true,
     imports: [
         MatDialogModule,
         MatInputModule,
@@ -21,43 +26,53 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatCheckboxModule,
         MatSelectModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        NgFor, NgIf
     ],
+    providers: [MatDatepickerModule],
     templateUrl: './vol-dialog.component.html',
     styleUrls: ['./vol-dialog.component.scss']
 })
-export class VolDialogComponent {
 
-  // Initialisation des valeurs par défaut pour les champs de formulaire
-  isDirect = false;
+
+export class VolDialogComponent {
+  
   flight = {
-    from: '',
-    to: '',
-    departureTime: '',
-    arrivalTime: '',
-    price: 0,
-    type: '',
-    travelClass: '',
-    transportCompany: '',
-    description: ''
+    villeDepart: '',
+    villeArrivee: '',
+    dateDepart: '',
+    dateArrivee: '',
+    prix: null,
+    compagnieAerienne: '',
+    nombrePlaces: null,
+    description: '',
+    photos: [],
+    classe: 'Economique',
+    escales: []
   };
 
-  constructor(public dialogRef: MatDialogRef<VolDialogComponent>) {}
+  
 
-  // Soumission du formulaire
+  constructor(private apiService: ServiceService, private dialogRef: MatDialogRef<VolDialogComponent>) {}
+  airports: Airport[] = [];
+  airlines: Airline[] = [];
+  ngOnInit() {
+    this.apiService.getAllAirports().subscribe((data: Airport[]) => {
+      this.airports = data;
+    });
+
+    this.apiService.getAllAirlines().subscribe((data: Airline[]) => {
+      this.airlines = data;
+    });
+  }
+
   onSubmit() {
-    // Vérification si le vol est direct ou indirect
-    this.flight.type = this.isDirect ? 'Direct' : 'Indirect';
-    
-    // Afficher les informations du vol dans la console
-    console.log('Vol ajouté :', this.flight);
-    
-    // Fermer le dialog avec les informations du vol
-    this.dialogRef.close(this.flight);
+    console.log(this.flight);
+    this.apiService.addVol(this.flight).subscribe((response) => {
+      console.log('Flight added successfully', response);
+    });
   }
 
-  // Annuler et fermer le dialog
   onClose() {
-    this.dialogRef.close();
-  }
+    this.dialogRef.close();  }
 }

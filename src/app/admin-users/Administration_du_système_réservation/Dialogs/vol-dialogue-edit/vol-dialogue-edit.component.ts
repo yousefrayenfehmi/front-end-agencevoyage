@@ -9,6 +9,7 @@ import { MatOption } from '@angular/material/core';
 
 @Component({
     selector: 'app-vol-dialogue-edit',
+    standalone: true,
     imports: [MatDialogModule,
         MatInputModule,
         MatFormFieldModule,

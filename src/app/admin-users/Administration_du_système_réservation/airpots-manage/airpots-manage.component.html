@@ -1,0 +1,68 @@
+<div class="container">
+    <h2 class="text-xl font-semibold mb-4">Gestion des Aéroports</h2>
+    <button (click)="handleAdd('airport')" class="add-button mb-4">
+      Ajouter un Aéroport
+    </button>
+    
+    <!-- Table des Aéroports -->
+    <table class="airport-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Code</th>
+          <th>Ville</th>
+          <th>Pays</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let airport of paginatedData">
+          <td>{{ airport.id }}</td>
+          <td>{{ airport.name }}</td>
+          <td>{{ airport.code }}</td>
+          <td>{{ airport.city }}</td>
+          <td>{{ airport.country }}</td>
+          <td>
+            <div class="actions-container">
+              <button (click)="handleEdit('airport', airport)" class="edit-button">
+                Modifier
+              </button>
+              <button (click)="handleDelete('airport', airport.id)" class="delete-button">
+                Supprimer
+              </button>
+              <button (click)="showDescription(airport)" class="view-description-button">
+                Voir détails
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <!-- Pagination -->
+    <div class="pagination-container">
+      <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-button">
+        Page Précédente
+      </button>
+      <span>Page {{ currentPage }} / {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-button">
+        Page Suivante
+      </button>
+    </div>
+  
+    <!-- Description Modal -->
+    <div *ngIf="selectedAirport" class="description-modal">
+      <div class="modal-content">
+        <h3>Détails de l'Aéroport</h3>
+        <p><strong>Nom:</strong> {{ selectedAirport.name }}</p>
+        <p><strong>Code:</strong> {{ selectedAirport.code }}</p>
+        <p><strong>Ville:</strong> {{ selectedAirport.city }}</p>
+        <p><strong>Pays:</strong> {{ selectedAirport.country }}</p>
+        <button (click)="closeDescription()" class="close-button">
+          Fermer
+        </button>
+      </div>
+    </div>
+  </div>
+  

@@ -6,6 +6,7 @@ import { ServiceService } from './service.service';
 
 @Component({
     selector: 'app-root',
+    standalone: true,
     imports: [RouterOutlet, InscripComponent, NgIf, RouterLink],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
@@ -13,7 +14,7 @@ import { ServiceService } from './service.service';
 export class AppComponent {
   title = 'agence_voyage';
   token: string | null = null;  // Declare token
-
+  
   constructor(private _service: ServiceService) {
     console.log("navvupdate");
   }

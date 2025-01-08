@@ -2,49 +2,45 @@
   <mat-card-header>
     <mat-card-title>
       <mat-icon>flight_takeoff</mat-icon>
-      Recherche de Vols
+      Recherche des vols
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <div class="grid-container">
+      
       <mat-form-field class="form-field">
         <mat-label>Ville de départ</mat-label>
-        <input [(ngModel)]="vols.depart" matInput placeholder="Ville de départ" />
+        <mat-select [(ngModel)]="volSearchCriteria.depart" name="villeDepart" required>
+          <mat-option *ngFor="let airport of airports" [value]="airport">{{ airport.name }}</mat-option>
+        </mat-select>
       </mat-form-field>
-
+  
+      <!-- Ville d'arrivée -->
       <mat-form-field class="form-field">
         <mat-label>Ville d'arrivée</mat-label>
-        <input [(ngModel)]="vols.arrivee" matInput placeholder="Ville d'arrivée" />
+        <mat-select [(ngModel)]="volSearchCriteria.arrivee" name="villeArrivee" required>
+          <mat-option *ngFor="let airport of airports" [value]="airport">{{ airport.name }}</mat-option>
+        </mat-select>
       </mat-form-field>
+
     </div>
 
     <div class="grid-container">
       <mat-form-field class="form-field">
         <mat-label>Date de départ</mat-label>
-        <input [(ngModel)]="vols.dateDepart" matInput type="date" />
+        <input [(ngModel)]="volSearchCriteria.dateDepart" matInput type="date" />
       </mat-form-field>
     </div>
 
-    <!-- Ajouter le groupe de boutons radio pour choisir entre "Aller simple" et "Aller-retour" -->
-    <div class="grid-container">
-      <mat-radio-group [(ngModel)]="vols.type">
-        <mat-radio-button value="aller-simple">Aller simple</mat-radio-button>
-        <mat-radio-button value="aller-retour">Aller-retour</mat-radio-button>
-      </mat-radio-group>
-    </div>
+    
 
-    <!-- Affichage conditionnel de la date de retour seulement si "Aller-retour" est sélectionné -->
-    <div class="grid-container" *ngIf="vols.type === 'aller-retour'">
-      <mat-form-field class="form-field">
-        <mat-label>Date de retour</mat-label>
-        <input [(ngModel)]="vols.dateRetour" matInput type="date" />
-      </mat-form-field>
-    </div>
+    
 
     <div class="grid-container">
       <mat-form-field class="form-field">
         <mat-label>Classe</mat-label>
-        <mat-select [(ngModel)]="vols.class">
+        <mat-select [(ngModel)]="volSearchCriteria.class">
+          <mat-option value="">Tous</mat-option>
           <mat-option value="economy">Économique</mat-option>
           <mat-option value="business">Affaires</mat-option>
           <mat-option value="first">Première</mat-option>
@@ -53,12 +49,12 @@
 
       <mat-form-field class="form-field">
         <mat-label>Passagers</mat-label>
-        <input [(ngModel)]="vols.passage" matInput type="number" />
+        <input [(ngModel)]="volSearchCriteria.passage" matInput type="number" />
       </mat-form-field>
     </div>
 
     <button mat-raised-button color="primary" (click)="search()" class="full-width">
-      Rechercher des vols
+      Rechercher des volSearchCriteria
     </button>
   </mat-card-content>
 </mat-card>

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -8,98 +8,97 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { ServiceService } from '../service.service';
 import { Router } from '@angular/router';
-import { NgIf } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
+import { Airport } from '../airport';
+import { Airline } from '../airline';
 
 @Component({
-    selector: 'app-vols-recherche',
-    imports: [
-        MatButtonModule,
-        MatInputModule,
-        MatSelectModule,
-        MatIconModule,
-        MatCardModule,
-        FormsModule,
-        NgIf,
-        MatRadioModule
-    ],
-    templateUrl: './vols-recherche.component.html',
-    styleUrl: './vols-recherche.component.scss'
+  selector: 'app-vols-recherche',
+  imports: [
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
+    MatIconModule,
+    MatCardModule,
+    FormsModule,
+    NgIf,
+    MatRadioModule,
+    NgFor
+  ],
+  templateUrl: './vols-recherche.component.html',
+  styleUrls: ['./vols-recherche.component.scss']
 })
 export class VolsRechercheComponent {
   @Input() activeTab: string = 'flights';
-  vol: any[] = [];
-  airports:any[]=[]
-  constructor(private Service: ServiceService, private router: Router) {
+  vols: any[] = []; // This will store the flight data (not the search criteria)
+  airports: Airport[] = [];
+  airlines: Airline[] = [];
 
-  }
-  ngOnInit(): void {
-    this.getAirpots();
-    
-  }
-
-  // Get all airlines
-  getAirpots() {
-    this.Service.getAllAirports().subscribe((response) => {
-      this.airports = response;
-      console.log(this.airports)
-    });
-  }
-  vols = {
-    depart: '',
-    arrivee: '',
+  volSearchCriteria = {
+    depart: null as Airport | null,
+    arrivee: null as Airport | null,
     dateDepart: '',
-    dateRetour: '',
     class: '',
     passage: 1,
-    type: 'aller-simple' 
+    type: 'aller-simple'
   };
 
+  constructor(private service: ServiceService, private router: Router) {}
+
+  ngOnInit() {
+    this.service.getAllAirports().subscribe((data: Airport[]) => {
+      this.airports = data;
+    });
+
+    this.service.getAllAirlines().subscribe((data: Airline[]) => {
+      this.airlines = data;
+    });
+
+    this.service.getAllVols().subscribe((data: any[]) => {
+      this.vols = data;
+      console.log(data);
+    });
+  }
+
   validateInputs(): boolean {
-    return this.vols.depart !== '' && this.vols.arrivee !== '' && this.vols.dateDepart !== '';
+    return (
+      this.volSearchCriteria.depart !== null &&
+      this.volSearchCriteria.arrivee !== null &&
+      new Date(this.volSearchCriteria.dateDepart) > new Date()
+    );
   }
 
   search() {
+    console.log(this.volSearchCriteria);
     if (!this.validateInputs()) {
-      console.log('Veuillez remplir tous les champs obligatoires');
+      console.log('Veuillez Vérifier tous les champs');
       return;
     }
+    
+    const allerVol = this.recupererVol();
 
-    const allerVol = this.recupererVol(this.vols.dateDepart, this.vols.depart, this.vols.arrivee);
-
-    if (this.vols.type === 'aller-simple') {
-      if (allerVol && allerVol.length > 0) { 
+    if (this.volSearchCriteria.type === 'aller-simple') {
+      if (allerVol && allerVol.length > 0) {
         this.router.navigate(['/check'], {
           state: { allerVol: allerVol }
-        });      } else {
+        });
+      } else {
         console.log('Aucun vol aller trouvé');
-      }
-    } else {
-      console.log('Recherche pour un aller-retour');
-
-      if (this.vols.dateRetour === '') {
-        console.log('Veuillez indiquer une date de retour');
-        return;
-      }
-
-      const retourVol = this.recupererVol(this.vols.dateRetour, this.vols.arrivee, this.vols.depart);
-
-      if (allerVol && allerVol.length > 0 && retourVol && retourVol.length > 0) {
-        this.router.navigate(['/check'], {
-          state: { allerVol: allerVol, retourVol: retourVol }
-        });      } else {
-        console.log('Aucun vol aller ou retour trouvé');
       }
     }
   }
 
-  recupererVol(dateDepart: string, depart: string, arrivee: string) {
-    const foundVol = this.vol.filter(v =>
-      v.departureTime.includes(dateDepart) &&
-      v.from.includes(depart) &&
-      v.to.includes(arrivee)
+  recupererVol() {
+    const givenDate = new Date(this.volSearchCriteria.dateDepart ?? ''); // Default to empty string if undefined or null
+
+    // Ensure that depart and arrivee are valid objects with _id
+    const foundVol = this.vols.filter(v => 
+      new Date(v.dateDepart) > givenDate &&
+      v.villeDepart?._id === this.volSearchCriteria.depart?._id &&
+      v.villeArrivee?._id === this.volSearchCriteria.arrivee?._id
     );
 
-    return foundVol.length > 0 ? foundVol : null; 
+    return foundVol.length > 0 ? foundVol : null;
   }
 }

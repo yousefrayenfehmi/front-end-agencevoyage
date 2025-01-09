@@ -35,6 +35,8 @@ export class ServiceService {
 
   // Delete airline by ID
   deleteAirline(id: string): Observable<any> {
+    console.log("ddd-"+id);
+    
     return this.http.delete(`${this.baseUrl}/airlines/${id}`);
   }
 
@@ -62,6 +64,8 @@ export class ServiceService {
 
   // Delete airport by ID
   deleteAirport(id: string): Observable<any> {
+    console.log('hhhh'+id);
+    
     return this.http.delete(`${this.baseUrl}/airports/${id}`);
   }
 
@@ -145,6 +149,8 @@ export class ServiceService {
   }
   
   deleteUser(id: number): Observable<any> {
+    console.log(id);
+    
     return this.http.delete(`http://localhost:3000/api/users/${id}`);
   }
   

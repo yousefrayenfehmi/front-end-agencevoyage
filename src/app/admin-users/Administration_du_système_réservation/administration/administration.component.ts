@@ -2,6 +2,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
+import { AdminUsersComponent } from '../../admin-users.component';
 import { AirlinesManageComponent } from '../airlines-manage/airlines-manage.component';
 import { AirpotsManageComponent } from '../airpots-manage/airpots-manage.component';
 import { VolsComponent } from "../vols/vols.component";
@@ -9,7 +10,7 @@ import { VolsComponent } from "../vols/vols.component";
 @Component({
     selector: 'app-administration',
     standalone: true,
-    imports: [MatTabGroup, MatTab, VolsComponent,AirpotsManageComponent,AirlinesManageComponent],
+    imports: [MatTabGroup, MatTab, VolsComponent,AirpotsManageComponent,AirlinesManageComponent,AdminUsersComponent],
     templateUrl: './administration.component.html',
     styleUrl: './administration.component.scss'
 })

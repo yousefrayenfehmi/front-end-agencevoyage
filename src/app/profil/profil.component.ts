@@ -70,6 +70,8 @@ export class ProfilComponent implements OnInit {
     this._service.logout();
     this.router.navigate(['/login']); 
   }
-
+  navigateToAdminPage() {
+    this.router.navigate(['/admin/admis']);
+  }
   
 }

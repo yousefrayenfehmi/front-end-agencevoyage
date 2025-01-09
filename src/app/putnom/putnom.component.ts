@@ -1,5 +1,5 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit,OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, ReactiveFormsModule } from '@angular/forms'; // Importer Reactive Forms
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatOption } from '@angular/material/core';
@@ -41,7 +41,7 @@ interface passanger{
   templateUrl: './putnom.component.html',
   styleUrls: ['./putnom.component.scss']
 })
-export class PutnomComponent  {  // Implement AfterViewInit
+export class PutnomComponent implements OnInit {  // Implement AfterViewInit
   uservol: any = {
     passage: 1, // Default value for `passage`
   };
@@ -58,7 +58,9 @@ export class PutnomComponent  {  // Implement AfterViewInit
 
   // Typage explicite du FormArray avec FormGroup
   passengersFormArray: FormArray<FormGroup> = new FormArray<FormGroup>([]);
-
+  ngOnInit(): void {
+    console.log(history.state);
+  }
   confirme()
   {
     this.uservol.passage=this.nbpassage;
@@ -104,18 +106,20 @@ export class PutnomComponent  {  // Implement AfterViewInit
 
   // Fonction pour soumettre le formulaire
   onSubmit() {
-    if (this.passengersFormArray.valid) {
+    console.log('hhhh');
+    
+    
       // Création d'un objet reserve
       const reservation: Reserve = {
-        idvoyage: history.state.uservol._id,
-        nombrepassager: this.passagesArray.length,
-        passagers: this.passengersFormArray.value,
-        prix:this.passagesArray.length*history.state.uservol.prix
+        idvoyage: history.state.vole.id,
+        nombrepassager: this.passengers.length,
+        passagers: this.passengers,
+        prix:this.passengers.length*history.state.vole.price
       };
 
     this.router.navigate(['/paypal'],{state:{reserve:reservation}})
       
-  }
+  
 
  
 }

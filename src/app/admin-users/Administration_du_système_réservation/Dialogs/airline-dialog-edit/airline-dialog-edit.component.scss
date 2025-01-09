@@ -1,0 +1,23 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  
+  .form-field {
+    width: 100%;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  mat-card {
+    margin: 20px;
+  }
+  
+  button {
+    width: 100%;
+  }
+  

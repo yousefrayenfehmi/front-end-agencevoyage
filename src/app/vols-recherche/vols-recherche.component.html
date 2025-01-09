@@ -4,8 +4,10 @@
       <mat-icon>flight_takeoff</mat-icon>
       Recherche des vols
     </mat-card-title>
+    
   </mat-card-header>
   <mat-card-content>
+    
     <div class="grid-container">
       
       <mat-form-field class="form-field">
@@ -32,9 +34,11 @@
       </mat-form-field>
     </div>
 
-    
-
-    
+    <div class="grid-container">
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  </div>
 
     <div class="grid-container">
       <mat-form-field class="form-field">
@@ -53,8 +57,11 @@
       </mat-form-field>
     </div>
 
+<!-- Error message -->
+
     <button mat-raised-button color="primary" (click)="search()" class="full-width">
-      Rechercher des volSearchCriteria
+      Rechercher 
     </button>
   </mat-card-content>
+  
 </mat-card>

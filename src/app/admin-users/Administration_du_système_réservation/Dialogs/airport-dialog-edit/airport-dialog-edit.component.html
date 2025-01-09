@@ -1,1 +1,35 @@
-<p>airport-dialog-edit works!</p>
+<h2 mat-dialog-title>Ajouter un Aéroport</h2>
+<mat-dialog-content>
+  <form (ngSubmit)="onSubmit()" class="grid-container">
+    
+    <!-- Nom de l'aéroport -->
+    <mat-form-field class="form-field">
+      <mat-label>Nom de l'aéroport</mat-label>
+      <input matInput [(ngModel)]="airport.name" name="name" required>
+    </mat-form-field>
+
+    <!-- Code de l'aéroport -->
+    <mat-form-field class="form-field">
+      <mat-label>Code de l'aéroport (IATA)</mat-label>
+      <input matInput [(ngModel)]="airport.code" name="code" required>
+    </mat-form-field>
+
+    <!-- Ville -->
+    <mat-form-field class="form-field">
+      <mat-label>Ville</mat-label>
+      <input matInput [(ngModel)]="airport.city" name="city" required>
+    </mat-form-field>
+
+    <!-- Pays -->
+    <mat-form-field class="form-field">
+      <mat-label>Pays</mat-label>
+      <input matInput [(ngModel)]="airport.country" name="country" required>
+    </mat-form-field>
+
+    <!-- Action Buttons -->
+    <div class="grid-container">
+      <button mat-raised-button color="primary" type="submit">Ajouter</button>
+      <button mat-raised-button (click)="onClose()" type="button">Annuler</button>
+    </div>
+  </form>
+</mat-dialog-content>

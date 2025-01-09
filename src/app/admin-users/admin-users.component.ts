@@ -78,10 +78,12 @@ export class AdminUsersComponent implements OnInit {
 
   deleteUser(user: any) {
     if (confirm('Are you sure you want to delete this user?')) {
-      this.service.deleteUser(user.id).subscribe(
+      console.log(user);
+      
+      this.service.deleteUser(user._id).subscribe(
         (res) => {
           console.log('User deleted successfully', 'Close', { duration: 3000 });
-          this.getAllUsers(); // Refresh users list
+          this.getAllUsers(); 
         },
         (err) => {
           console.log('Error deleting user', 'Close', { duration: 3000 });

@@ -17,7 +17,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let airline of paginatedData">
-          <td>{{ airline.id }}</td>
+          <td>{{ airline._id }}</td>
           <td>{{ airline.name }}</td>
           <td>{{ airline.iataCode }}</td>
           <td>{{ airline.country }}</td>
@@ -26,7 +26,7 @@
               <button (click)="handleEdit('airline', airline)" class="edit-button">
                 Modifier
               </button>
-              <button (click)="handleDelete('airline', airline.id)" class="delete-button">
+              <button (click)="handleDelete('airline', airline._id)" class="delete-button">
                 Supprimer
               </button>
               <button (click)="showDescription(airline)" class="view-description-button">

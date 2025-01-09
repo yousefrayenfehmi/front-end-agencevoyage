@@ -1,1 +1,29 @@
-<p>airline-dialog-edit works!</p>
+<h2 mat-dialog-title>Modifier une Compagnie Aérienne</h2>
+<mat-dialog-content>
+  <form (ngSubmit)="onSubmit()" class="grid-container">
+    
+    <!-- Nom de la compagnie aérienne -->
+    <mat-form-field class="form-field">
+      <mat-label>Nom de la compagnie aérienne</mat-label>
+      <input matInput [(ngModel)]="airline.name" name="name" required>
+    </mat-form-field>
+
+    <!-- Code IATA -->
+    <mat-form-field class="form-field">
+      <mat-label>Code IATA</mat-label>
+      <input matInput [(ngModel)]="airline.iataCode" name="iataCode" required>
+    </mat-form-field>
+
+    <!-- Pays -->
+    <mat-form-field class="form-field">
+      <mat-label>Pays</mat-label>
+      <input matInput [(ngModel)]="airline.country" name="country" required>
+    </mat-form-field>
+
+    <!-- Action Buttons -->
+    <div class="grid-container">
+      <button mat-raised-button color="primary" type="submit">Enregistrer</button>
+      <button mat-raised-button (click)="onClose()" type="button">Annuler</button>
+    </div>
+  </form>
+</mat-dialog-content>

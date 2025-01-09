@@ -13,59 +13,64 @@
                 <div class="card-body p-5 shadow-5 text-center">
                   <h2 class="fw-bold mb-5" style="color:black">Sign up now</h2>
 
-                  <!-- Main Form -->
                   <form *ngIf="!verificationSent" (ngSubmit)="submit()">
+                    <!-- Nom -->
                     <div class="form-outline mb-4">
                       <input type="text" id="form3Example6" class="form-control" [(ngModel)]="user.nom" [ngModelOptions]="{standalone: true}" required />
                       <label class="form-label" for="form3Example6">Full Name</label>
                     </div>
-
+                  
+                    <!-- Email -->
                     <div class="form-outline mb-4">
                       <input type="email" id="form3Example3" class="form-control" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" required />
                       <label class="form-label" for="form3Example3">Email address</label>
                     </div>
-
+                  
+                    <!-- Password -->
                     <div class="form-outline mb-4">
-                      <input type="password" id="form3Example4" class="form-control" [(ngModel)]="user.mot_de_passe" [ngModelOptions]="{standalone: true}" required (keypress)="presskey()" />
+                      <input type="password" id="form3Example4" class="form-control" [(ngModel)]="user.mot_de_passe" [ngModelOptions]="{standalone: true}" required (input)="checkPasswordMatch()" />
                       <label class="form-label" for="form3Example4">Password</label>
                     </div>
-
-                    <div *ngIf="validPassword == false" class="error mb-3">
-                      The password must contain at least one letter, one number, and one special character.
-                    </div>
-
+                  
+                    <!-- Confirmation du mot de passe -->
                     <div class="form-outline mb-4">
-                      <input type="date" id="form3Example7" class="form-control" [(ngModel)]="user.date_naissance" [ngModelOptions]="{standalone: true}" required />
+                      <input type="password" id="form3Example4Confirm" class="form-control" [(ngModel)]="confirmPassword" [ngModelOptions]="{standalone: true}" required (input)="checkPasswordMatch()" />
+                      <label class="form-label" for="form3Example4Confirm">Confirm Password</label>
+                    </div>
+                  
+                    <!-- Message d'erreur pour la correspondance des mots de passe -->
+                    <div *ngIf="!passwordsMatch" class="text-danger mb-3">
+                      Passwords do not match.
+                    </div>
+                  
+                    <!-- Date de naissance -->
+                    <div class="form-outline mb-4">
+                      <input type="date" id="form3Example7" class="form-control" [(ngModel)]="user.date_naissance" [ngModelOptions]="{standalone: true}" required (change)="validateDateOfBirth()" />
                       <label class="form-label" for="form3Example7">Date of Birth</label>
                     </div>
-
+                  
+                    <!-- Message d'erreur pour l'âge -->
+                    <div *ngIf="!validAge" class="text-danger mb-3">
+                      You must be at least 18 years old.
+                    </div>
+                  
+                    <!-- Téléphone -->
                     <div class="form-outline mb-4">
                       <input type="tel" id="form3Example5" class="form-control" [(ngModel)]="user.telephone" [ngModelOptions]="{standalone: true}" required />
                       <label class="form-label" for="form3Example5">Phone Number</label>
                     </div>
-
+                  
+                    <!-- Adresse -->
                     <div class="form-outline mb-4">
                       <input type="text" id="form3Example6" class="form-control" [(ngModel)]="user.adresse" [ngModelOptions]="{standalone: true}" required />
                       <label class="form-label" for="form3Example6">Address</label>
                     </div>
-
-                    <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
-                    <div class="error mb-3">{{Validform}}</div>
-
-                    <div class="text-center">
-                      <p>or sign up with:</p>
-                      <button (click)="signupgmail()" type="button" class="btn btn-link btn-floating mx-1">
-                        <i class="fab fa-google"></i>
-                      </button>
-                    </div>
+                  
+                    <!-- Bouton -->
+                    <button type="submit" class="btn btn-primary btn-block mb-4" [disabled]="!formValid()">Sign up</button>
+                    <div class="error mb-3">{{ Validform }}</div>
                   </form>
-
-                  <!-- Verification Form -->
-                  <form *ngIf="verificationSent">
-                    <p>A verification code has been sent to your email address.</p>
-                    <input type="text" [(ngModel)]="verificationCode" placeholder="Verification Code" [ngModelOptions]="{standalone: true}" required />
-                    <button (click)="confimerRegister()" class="btn btn-primary">Verify</button>
-                  </form>
+                  
                 </div>
               </div>
             </div>

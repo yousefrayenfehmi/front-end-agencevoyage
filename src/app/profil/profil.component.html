@@ -47,7 +47,13 @@
               <div class="col-md-12">
                 <p><strong>Roles:</strong></p>
                 <ul class="list-inline">
-                  <li *ngFor="let role of userProfile.roles" class="list-inline-item badge bg-info text-white">{{ role }}</li>
+                  <li *ngFor="let role of userProfile.roles" class="list-inline-item badge bg-info text-white">
+                    <button *ngIf="role === 'admin'" class="btn btn-primary" (click)="navigateToAdminPage()">Admin</button>
+                    <span *ngIf="role !== 'admin'">{{ role }}</span> <!-- For non-admin roles, show the role as text -->
+                  </li>
+                  
+                  
+                  
                 </ul>
               </div>
             </div>

@@ -35,6 +35,8 @@ export class ServiceService {
 
   // Delete airline by ID
   deleteAirline(id: string): Observable<any> {
+    console.log("ddd-"+id);
+    
     return this.http.delete(`${this.baseUrl}/airlines/${id}`);
   }
 
@@ -62,6 +64,8 @@ export class ServiceService {
 
   // Delete airport by ID
   deleteAirport(id: string): Observable<any> {
+    console.log('hhhh'+id);
+    
     return this.http.delete(`${this.baseUrl}/airports/${id}`);
   }
 
@@ -92,14 +96,16 @@ export class ServiceService {
     return this.http.delete(`${this.baseUrl}/vols/${id}`);
   }
 
-  // Search vols with filters
   searchVols(filters: any): Observable<any> {
     return this.http.get(`${this.baseUrl}/vols/search`, { params: filters });
   }
 
-  // Check vol availability by ID
   checkVolAvailability(id: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/vols/${id}/availability`);
+  }
+
+  getVolsOnOffer(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/volsOnOffre`);
   }
 
   resgester(user:any):Observable<any>{
@@ -143,6 +149,8 @@ export class ServiceService {
   }
   
   deleteUser(id: number): Observable<any> {
+    console.log(id);
+    
     return this.http.delete(`http://localhost:3000/api/users/${id}`);
   }
   

@@ -22,7 +22,7 @@ constructor(private ratour:Router){}
         return actions.order.create({
           purchase_units: [{
             amount: {
-              value: "500", 
+              value: reserve.prix, 
               currency_code: 'USD'
             }
           }]

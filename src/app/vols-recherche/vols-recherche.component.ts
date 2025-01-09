@@ -64,18 +64,33 @@ export class VolsRechercheComponent {
   validateInputs(): boolean {
     return (
       this.volSearchCriteria.depart !== null &&
-      this.volSearchCriteria.arrivee !== null 
+      this.volSearchCriteria.arrivee !== null
     );
   }
+  
+  dateInvalid = false;
+  validateDate(): boolean {
+    const currentDate = new Date();
+    const selectedDate = new Date(this.volSearchCriteria.dateDepart);
+  
+    this.dateInvalid = selectedDate < currentDate;
+    return this.dateInvalid;
+  }
+  errorMessage = ''; // Holds the error message to display to the user
 
   search() {
-    console.log(this.volSearchCriteria);
-
-    if (!this.validateInputs()) {
-      console.log('Veuillez vérifier tous les champs');
+    this.errorMessage = ''; // Reset error message
+  
+    // Validate inputs and date
+    if (!this.validateInputs() || this.validateDate()) {
+      if (!this.validateInputs()) {
+        this.errorMessage = 'Les champs de départ et d’arrivée sont obligatoires.';
+      }
+      if (this.validateDate()) {
+        this.errorMessage = 'La date de départ ne peut pas être dans le passé.';
+      }
       return;
     }
-
     const allerVol = this.findVols(
       this.volSearchCriteria.dateDepart,
       this.volSearchCriteria.depart,

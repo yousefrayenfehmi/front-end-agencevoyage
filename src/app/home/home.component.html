@@ -8,12 +8,7 @@
             <mat-tab label="Vols">
               <app-vols-recherche></app-vols-recherche>
             </mat-tab>
-            <mat-tab label="Hôtels">
-              <app-hotels-search></app-hotels-search>
-            </mat-tab>
-            <mat-tab label="Vol + Hôtels">
-              <app-package-search></app-package-search>
-            </mat-tab>
+            
            
           </mat-tab-group>
         </div>
@@ -27,22 +22,23 @@
     <h2>Destinations en vedette</h2>
     <div class="destination-grid">
       <mat-card *ngFor="let destination of featuredDestinations" class="destination-card">
-        <img mat-card-image [src]="destination.imageUrl" [alt]="destination.name">
+        <img mat-card-image src="/assets/images/OSK.jpeg" [alt]="destination.villeArrivee.name">
         <mat-card-content>
-          <h3>{{ destination.name }}</h3>
-          <p class="country">{{ destination.country }}</p>
-          <p class="description">{{ destination.description }}</p>
+          <h3>{{ destination.villeArrivee.name }}</h3>
+          <p class="country">{{ destination.villeArrivee.city }}</p>
+          <p class="description">{{ destination.villeDepart.name }} -> {{destination.villeArrivee.name}}</p>
           <div class="price-rating">
-            <span class="price">{{ destination.price | currency:'EUR' }}</span>
+            <span class="price">{{ destination.prixEnOffre | currency:'D' }}</span>
             <span class="rating">
-              <mat-icon>star</mat-icon>
-              {{ destination.rating }}
+              <mat-icon>*</mat-icon>
+              
             </span>
           </div>
         </mat-card-content>
         <mat-card-actions>
+          
           <button mat-button color="primary">En savoir plus</button>
-          <button mat-raised-button color="accent">Réserver</button>
+          <button class="bt" mat-raised-button color="accent" (click)="commande(destination)">Réserver</button>
         </mat-card-actions>
       </mat-card>
     </div>

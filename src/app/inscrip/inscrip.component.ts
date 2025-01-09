@@ -13,84 +13,67 @@ import { Router } from '@angular/router';
     styleUrl: './inscrip.component.scss'
 })
 
-
-
 export class InscripComponent {
-  validPassword=true
-  Validform=''
-  verificationCode = ''; 
+  validPassword = true;
+  passwordsMatch = true;
+  validAge = true;
+  Validform = '';
+  verificationCode = '';
   code = '';
-  verificationSent = false; 
+  verificationSent = false;
 
-  user={
-    nom:'',
-    email:'',
-    mot_de_passe:'',
-    date_naissance:'',
-    telephone:'',
-    adresse:''
-  }
+  confirmPassword = ''; // Champ de confirmation du mot de passe
+
+  user = {
+    nom: '',
+    email: '',
+    mot_de_passe: '',
+    date_naissance: '',
+    telephone: '',
+    adresse: '',
+  };
+
   constructor(private _service: ServiceService, private router: Router) {}
 
-  submit(){
-    
-        if(this.validPassword==true){
-          console.log(this.validPassword);
-
-          if(this.user.nom && this.user.email && this.user.mot_de_passe && this.user.date_naissance && this.user.telephone && this.user.adresse  )
-                {this._service.resgester(this.user).subscribe(
-                    response=>{
-                      this.code=response.code
-                      this.verificationSent=true
-                    },
-                    err=>{console.log(err)}
-                )
-            }else{
-            
-            
-            this.Validform='Please fill all required fields'
-        }
-                
-          }
-          
-      
-  }
-presskey(){
-  if (this.validatePassword(this.user.mot_de_passe)) {
-    this.validPassword=true
-  } else {
-    this.validPassword=false
-  }
-}
-   validatePassword(password:any) {
-    const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
-  
-    return regex.test(password);
-  }
-  confimerRegister(){
-
-    if(this.code==this.verificationCode){
-      this._service.resgesterConfirme(this.user).subscribe(
-        response=>{console.log(response)
-          this.Validform='Compte Created'
-          
-          this.router.navigate(['/login']);
-
-           alert('Compte Created');
-
-          
-          
+  submit() {
+    if (this.formValid()) {
+      this._service.resgester(this.user).subscribe(
+        (response) => {
+          this.code = response.code;
+          this.verificationSent = true;
         },
-        err=>{console.log(err)}
-    )
-
+        (err) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.Validform = 'Please fill all required fields correctly';
     }
-
-  }
-  signupgmail(){
-    window.location.href='http://localhost:3000/api/auth/google'
-    
   }
 
-  
+  formValid(): boolean {
+    return this.validPassword && this.passwordsMatch && this.validAge && this.allFieldsFilled();
+  }
+
+  allFieldsFilled(): boolean {
+    const { nom, email, mot_de_passe, date_naissance, telephone, adresse } = this.user;
+    return !!(nom && email && mot_de_passe && date_naissance && telephone && adresse);
+  }
+
+  checkPasswordMatch() {
+    this.passwordsMatch = this.user.mot_de_passe === this.confirmPassword;
+  }
+
+  validateDateOfBirth() {
+    const today = new Date();
+    const birthDate = new Date(this.user.date_naissance);
+    const age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+      this.validAge = age - 1 >= 18;
+    } else {
+      this.validAge = age >= 18;
+    }
+  }
 }

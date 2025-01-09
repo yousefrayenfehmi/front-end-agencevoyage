@@ -75,27 +75,31 @@ export class AirpotsManageComponent {
     this.selectedAirport = null;  // Fermer la description
   }
   handleEdit(type: string, item: any) {
-    if (type === 'airpots') {
+    console.log(type);
+    
+    if (type === 'airport') {
       const dialogRef = this.dialog.open(AirportDialogEditComponent, {
         data: item  
       });
 
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
-          const index = this.airports.findIndex(flight => flight.id === result.id);
-          if (index !== -1) {
-            this.airports[index] = result;
-            this.totalPages = Math.ceil(this.airports.length / this.itemsPerPage);
-          }
+          this.service.updateAirport(result._id, result).subscribe(() => {
+            console.log("tbadel");
+          })
         }
       });
     }
   }
 
-  handleDelete(type: string, id: number) {
-    if (type === 'airpots') {
-      this.airports = this.airports.filter((flight) => flight.id !== id);
-      this.totalPages = Math.ceil(this.airports.length / this.itemsPerPage);
+  handleDelete(type: string, id: string) {
+    console.log(id);
+    
+    if (type === 'airport') {
+      this.service.deleteAirport(id).subscribe(() => {
+        console.log("sayer tfasa5");
+        
+      })
     }
   }
 }

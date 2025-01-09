@@ -1,3 +1,15 @@
+<div class="home-container">
+<div >
+  <mat-form-field class="form-field">
+    <mat-label>Passagers</mat-label>
+    <input [(ngModel)]="nbpassage" matInput type="number" />
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="confirme()" class="full-width">
+    Confirmer
+  </button>
+</div>
+
+</div>
 <div *ngFor="let passage of passagesArray; let i = index">
     <mat-card class="w-full max-w-2xl">
       <mat-card-header class="space-y-1">
@@ -9,25 +21,16 @@
     
       <mat-card-content>
         <form [formGroup]="getPassengerForm(i)" (ngSubmit)="onSubmit()" class="space-y-6">
-          <!-- RadioGroup for M. or Mme -->
-          <div class="flex gap-4">
-            <div class="flex items-center space-x-2">
-              <mat-radio-group formControlName="title" class="flex gap-4">
-                <mat-radio-button value="m">M.</mat-radio-button>
-                <mat-radio-button value="mme">Mme</mat-radio-button>
-              </mat-radio-group>
-            </div>
-          </div>
-    
+          
           <!-- Firstname and Lastname Inputs -->
           <div class="grid gap-4 md:grid-cols-2">
             <div class="space-y-2">
               <mat-label for="firstname">Prénom</mat-label>
-              <input matInput formControlName="firstName" id="firstname" placeholder="Prénom" />
+              <input matInput [(ngModel)]="passengers[i].prenom" formControlName="firstName" id="firstname" placeholder="Prénom" />
             </div>
             <div class="space-y-2">
               <mat-label for="lastname">Nom</mat-label>
-              <input matInput formControlName="lastName" id="lastname" placeholder="Nom" />
+              <input matInput [(ngModel)]="passengers[i].nom" formControlName="lastName" id="lastname" placeholder="Nom" />
             </div>
           </div>
     
@@ -61,7 +64,7 @@
           </div>
     
           <div class="mt-4">
-            <button mat-button type="submit" [disabled]="!getPassengerForm(i).valid">Soumettre</button>
+            <button mat-button type="submit" >Soumettre</button>
           </div>
 
 
@@ -69,4 +72,3 @@
       </mat-card-content>
     </mat-card>
   </div>
-  

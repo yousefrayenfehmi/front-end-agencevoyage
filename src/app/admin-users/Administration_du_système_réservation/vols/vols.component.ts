@@ -98,11 +98,16 @@ handleEdit(type: string, flight: any): void {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        const index = this.flights.findIndex((f) => f.id === result.id);
-        if (index !== -1) {
-          this.flights[index] = result;
-          this.updatePagination();
-        }
+        console.log(result);
+        
+        this.volService.updateVol(result._id,result).subscribe(() => {
+          this.fetchFlights();
+        })
+        
+      }
+      else{
+        console.log('8alet');
+        
       }
     });
   }
@@ -111,11 +116,15 @@ handleEdit(type: string, flight: any): void {
 /**
  * Handle deleting a flight by ID.
  */
-handleDelete(type: string, id: number): void {
+handleDelete(type: string, id: string): void {
   if (type === 'flights') {
     const confirmDelete = confirm('Êtes-vous sûr de vouloir supprimer ce vol ?');
+    console.log(id);
     if (confirmDelete) {
-      this.flights = this.flights.filter((flight) => flight.id !== id);
+      this.volService.deleteVol(id).subscribe(() => {
+        console.log('tfasa5');
+        
+      });
       this.updatePagination();
     }
   }

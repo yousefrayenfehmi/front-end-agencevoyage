@@ -81,20 +81,23 @@ export class AirlinesManageComponent {
 
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
-          const index = this.airlines.findIndex((airline) => airline.id === result.id);
-          if (index !== -1) {
-            this.airlines[index] = result;
-            this.totalPages = Math.ceil(this.airlines.length / this.itemsPerPage);
-          }
+          this.service.updateAirline(result._id, result).subscribe(() => {
+            console.log("tbadel");
+            
+          })
         }
       });
     }
   }
 
-  handleDelete(type: string, id: number) {
+  handleDelete(type: string, id: string) {
     if (type === 'airline') {
-      this.airlines = this.airlines.filter((airline) => airline.id !== id);
-      this.totalPages = Math.ceil(this.airlines.length / this.itemsPerPage);
+      console.log(id);
+      this.service.deleteAirline(id).subscribe(() => {
+        console.log("tfasa5");
+        
+      })
+     
     }
   }
 }

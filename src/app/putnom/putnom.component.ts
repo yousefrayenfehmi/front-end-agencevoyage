@@ -10,8 +10,12 @@ import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { MatSelect } from '@angular/material/select';
 import { PaymentDialogComponent } from '../payment-dialog/payment-dialog.component';
 import { Router } from '@angular/router';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 // Déclarer l'interface en dehors du composant
+
+
 interface Reserve {
   idvoyage: string;
   nombrepassager: number;
@@ -19,20 +23,30 @@ interface Reserve {
   prix:number;
 }
 
+interface passanger{
+  nom:string;
+  prenom:string;
+  birth:Date | null;
+}
 @Component({
   selector: 'app-putnom',
   standalone: true,
   imports: [
     CommonModule, NgFor, MatCard, MatLabel, MatOption, MatFormField,
     MatSelect, MatRadioGroup, MatRadioButton, MatCardHeader,
-    MatCardContent, MatIcon, MatCardTitle, ReactiveFormsModule,NgIf // Added ReactiveFormsModule
+    MatCardContent, MatIcon, MatCardTitle, ReactiveFormsModule,NgIf,MatFormFieldModule,
+    MatInputModule,
+    FormsModule,   // Added ReactiveFormsModule
   ],
   templateUrl: './putnom.component.html',
   styleUrls: ['./putnom.component.scss']
 })
 export class PutnomComponent  {  // Implement AfterViewInit
-  uservol: any;
+  uservol: any = {
+    passage: 1, // Default value for `passage`
+  };
   passagesArray: number[] = []; // Array pour la boucle *ngFor
+  nbpassage: number=1;
   months = [
     "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
     "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
@@ -40,24 +54,33 @@ export class PutnomComponent  {  // Implement AfterViewInit
   days = Array.from({ length: 31 }, (_, i) => i + 1); // Créer un tableau des jours [1, 2, 3, ..., 31]
   years = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i); // Créer un tableau pour les années
 
+  passengers:passanger[]=[];
+
   // Typage explicite du FormArray avec FormGroup
   passengersFormArray: FormArray<FormGroup> = new FormArray<FormGroup>([]);
 
-  ngOnInit() {
-    console.log(history.state.uservol);
-    console.log(history.state.vole);
-    if (history.state && history.state.uservol) {
-      this.uservol = history.state.uservol;
-      
-      // Si `uservol.passage` est un nombre, générer un tableau pour les passages et créer des form groups
-      if (typeof this.uservol.passage === 'number') {
-        this.passagesArray = Array.from({ length: this.uservol.passage }, (_, i) => i);
-        this.initializePassengersForm(); // Initialiser le formulaire pour chaque passager
-      }
-    }
-
-    console.log(this.passagesArray); // Vérification du tableau passagesArray
+  confirme()
+  {
+    this.uservol.passage=this.nbpassage;
+    console.log(this.uservol)
+    this.debut();
   }
+  
+
+  debut()
+  {
+    console.log(this.passengers)
+    if (typeof this.uservol.passage === 'number') {
+      this.passagesArray = Array.from({ length: this.uservol.passage }, (_, i) => i);
+      this.passengers = Array.from({ length: this.uservol.passage }, () => ({
+        nom: '',
+        prenom: '',
+        birth: null // Use null for an uninitialized Date
+      }));
+      this.initializePassengersForm(); 
+    }
+  }
+
   // Initialiser le formulaire pour chaque passager
   initializePassengersForm() {
     this.passagesArray.forEach(() => {

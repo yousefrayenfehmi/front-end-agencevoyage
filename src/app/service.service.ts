@@ -92,14 +92,16 @@ export class ServiceService {
     return this.http.delete(`${this.baseUrl}/vols/${id}`);
   }
 
-  // Search vols with filters
   searchVols(filters: any): Observable<any> {
     return this.http.get(`${this.baseUrl}/vols/search`, { params: filters });
   }
 
-  // Check vol availability by ID
   checkVolAvailability(id: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/vols/${id}/availability`);
+  }
+
+  getVolsOnOffer(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/volsOnOffre`);
   }
 
   resgester(user:any):Observable<any>{

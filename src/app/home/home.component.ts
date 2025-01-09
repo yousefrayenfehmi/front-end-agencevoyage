@@ -13,7 +13,8 @@ import { PackageSearchComponent } from "../package-search/package-search.compone
 import { CarRentalSearchComponent } from "../car-rental-search/car-rental-search.component";
 import { FlightCardComponent } from "../flight-card/flight-card.component";
 import { VolsComponent } from '../admin-users/Administration_du_système_réservation/vols/vols.component';
-import { VolService } from '../vol.service';
+import { Router } from '@angular/router';
+import { ServiceService } from '../service.service';
 @Component({
     selector: 'app-home',
     imports: [MatCardModule, MatButtonModule, MatIconModule, CommonModule, MatFormFieldModule,
@@ -23,15 +24,21 @@ import { VolService } from '../vol.service';
 })
 export class HomeComponent implements OnInit {
 
-  featuredDestinations: Destination[] = [];
+  featuredDestinations: any[] = [];
   vols:any[]=[];
-  constructor(private destinationService: DestinationService) {}
+  constructor(private destinationService: DestinationService,private service:ServiceService,private router: Router) {}
   ngOnInit() {
       
-      this.featuredDestinations = this.destinationService.getDestinations();
-      
+      this.service.getVolsOnOffer().subscribe((vols) => {
+        this.featuredDestinations = vols;
+        console.log(vols);
+      });
       
   }
 
+  commande(voles:any){
+    console.log(voles);
+    this.router.navigate(['/put'], { state: { vole: voles,uservol:history.state.userInfo} });
+}
 
 }

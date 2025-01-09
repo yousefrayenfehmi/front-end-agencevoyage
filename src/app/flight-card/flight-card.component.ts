@@ -57,19 +57,12 @@ export class FlightCardComponent implements OnInit {
         });
       });
     }
-
-    
-         
-      
+        
     }
    
-  
-
-  commande(voles:any){
-    console.log(voles);
-    
-    this.router.navigate(['/put'], { state: { vole: voles,uservol:history.state.userInfo} });
-    
+  commande(voleselectionne:any){
+    console.log(voleselectionne);
+    this.router.navigate(['/put'], { state: { vole: voleselectionne,uservol:history.state.userInfo} });
 }
   
 }
